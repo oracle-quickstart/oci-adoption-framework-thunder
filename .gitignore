@@ -1,0 +1,5 @@
+*tfstate*
+*.terraform*
+provider.auto.tfvars
+*.DS_Store
+*pycache*

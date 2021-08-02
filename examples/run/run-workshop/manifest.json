@@ -1,0 +1,52 @@
+{
+    "tutorials": [
+        {
+            "title": "Run intro",
+            "description": "run intro",
+            "partnumber": "Ennnnn_01",
+            "publisheddate": "04/01/2020",
+            "contentid": "12nnnn",
+            "filename": "./run.md"
+        },
+        {
+            "title": "Lab 1: Autoscaling",
+            "description": "Autoscaling lab",
+            "partnumber": "Ennnnn_01",
+            "publisheddate": "04/01/2020",
+            "contentid": "12nnnn",
+            "filename": "../asg/asg.md"
+        },
+        {
+            "title": "Lab 2: Glusterfs",
+            "description": "GlusterFS lab",
+            "partnumber": "Ennnnn_01",
+            "publisheddate": "04/01/2020",
+            "contentid": "12nnnn",
+            "filename": "../glusterfs/glusterfs.md"
+        },
+        {
+            "title": "Lab 3: Grafana",
+            "description": "Grafana lab",
+            "partnumber": "Ennnnn_01",
+            "publisheddate": "04/01/2020",
+            "contentid": "12nnnn",
+            "filename": "../grafana/grafana.md"
+        },
+        {
+            "title": "Lab 4: KMS",
+            "description": "KMS lab",
+            "partnumber": "Ennnnn_01",
+            "publisheddate": "04/01/2020",
+            "contentid": "12nnnn",
+            "filename": "../kms/kms.md"
+        },
+        {
+            "title": "Lab 5: WaaS",
+            "description": "WaaS Lab",
+            "partnumber": "Ennnnn_01",
+            "publisheddate": "04/01/2020",
+            "contentid": "12nnnn",
+            "filename": "../waas/waas.md"
+        }
+    ]
+}
