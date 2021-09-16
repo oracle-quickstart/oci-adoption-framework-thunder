@@ -9,7 +9,14 @@ variable "comp_params" {
     name          = string
     description   = string
     enable_delete = bool
+    parent_name   = string
   }))
+}
+
+variable "parent_comp" {
+  type        = map(any)
+  default     = {}
+  description = "Leave it empty if you want to create compartments under tenancy"
 }
 
 variable "user_params" {
@@ -29,10 +36,10 @@ variable "group_params" {
 
 variable "policy_params" {
   type = map(object({
-    name           = string
-    description    = string
-    compartment_id = string
-    statements     = list(string)
+    name             = string
+    compartment_name = string
+    description      = string
+    statements       = list(string)
   }))
 }
 

@@ -16,11 +16,17 @@ output "users" {
 
 output "compartments" {
   value = {
-    for compartment in oci_identity_compartment.this:
-      compartment.name => compartment.id
+    for compartment in oci_identity_compartment.this :
+    split("__", format("%s__%s", compartment.name, time_sleep.wait.id))[0] => compartment.id
   }
 }
 
+output "compartment_maps" {
+  value = {
+    for compartment in oci_identity_compartment.this:
+      split("__", format("%s__%s", compartment.name, time_sleep.wait.id))[0] => tomap({ "name" = compartment.name, "id" = compartment.id})
+  }
+}
 
 output "policies" {
   value = {
