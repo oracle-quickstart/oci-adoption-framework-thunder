@@ -7,11 +7,13 @@ comp_params = {
     name          = "sandbox"
     description   = "The sandbox compartment contains crawl, walk, run resources for the framework including IAM."
     enable_delete = false
+    parent_name   = ""
   }
   test_comp = {
     name          = "test_comp"
     description   = "this is the IFS compartment"
     enable_delete = false
+    parent_name   = ""
   }
 }
 
@@ -71,6 +73,8 @@ policy_params = {
   "Root_IAMAdminManagers.pl" = {
     name        = "Root_IAMAdminManagers.pl"
     description = "Root_IAMAdminManagers.pl"
+    #Leave compartment_name empty to create resources at the tenancy level.
+    compartment_name = ""
 
     statements = [
       "ALLOW GROUP Root_IAMAdminManagers.grp to read users IN TENANCY",
@@ -83,6 +87,8 @@ policy_params = {
   "User_IAMManagers.pl" = {
     name        = "User_IAMManagers.pl"
     description = "User_IAMManagers.pl"
+    #Leave compartment_name empty to create resources at the tenancy level.
+    compartment_name = ""
 
     statements = [
       "ALLOW GROUP User_IAMManagers.grp to read users IN TENANCY",
@@ -94,6 +100,8 @@ policy_params = {
   "Tenancy_NetSecAdmins.pl" = {
     name        = "Tenancy_NetSecAdmins.pl"
     description = "Tenancy_NetSecAdmins.pl"
+    #Leave compartment_name empty to create resources at the tenancy level.
+    compartment_name = ""
 
     statements = [
       "ALLOW GROUP Tenancy_NetSecAdmins.grp to manage security-lists IN TENANCY",
@@ -108,6 +116,8 @@ policy_params = {
   "Tenancy_ReadOnly.pl" = {
     name        = "Tenancy_ReadOnly.pl"
     description = "Tenancy_ReadOnly.pl"
+    #Leave compartment_name empty to create resources at the tenancy level.
+    compartment_name = ""
 
     statements = [
       "ALLOW GROUP Tenancy_ReadOnly.grp to read all-resources IN TENANCY"
@@ -480,49 +490,49 @@ adw_params = {
 
 #------------ Compute --------------
 linux_images = {
-  ap-melbourne-1  = {
+  ap-melbourne-1 = {
     centos6 = "ocid1...."
     centos7 = "ocid1...."
     oel6    = "ocid1...."
     oel7    = "ocid1...."
   }
-  ap-mumbai-1     = {
+  ap-mumbai-1 = {
     centos6 = "ocid1...."
     centos7 = "ocid1...."
     oel6    = "ocid1...."
     oel7    = "ocid1...."
   }
-  ap-osaka-1      = {
+  ap-osaka-1 = {
     centos6 = "ocid1...."
     centos7 = "ocid1...."
     oel6    = "ocid1...."
     oel7    = "ocid1...."
   }
-  ap-seoul-1     = {
+  ap-seoul-1 = {
     centos6 = "ocid1...."
     centos7 = "ocid1...."
     oel6    = "ocid1...."
     oel7    = "ocid1...."
   }
-  ap-sydney-1    = {
+  ap-sydney-1 = {
     centos6 = "ocid1...."
     centos7 = "ocid1...."
     oel6    = "ocid1...."
     oel7    = "ocid1...."
   }
-  ap-tokyo-1     = {
+  ap-tokyo-1 = {
     centos6 = "ocid1...."
     centos7 = "ocid1...."
     oel6    = "ocid1...."
     oel7    = "ocid1...."
   }
-  ca-montreal-1  = {
+  ca-montreal-1 = {
     centos6 = "ocid1...."
     centos7 = "ocid1...."
     oel6    = "ocid1...."
     oel7    = "ocid1...."
   }
-  ca-toronto-1   = {
+  ca-toronto-1 = {
     centos6 = "ocid1...."
     centos7 = "ocid1...."
     oel6    = "ocid1...."
@@ -540,19 +550,19 @@ linux_images = {
     oel6    = "ocid1...."
     oel7    = "ocid1...."
   }
-  eu-zurich-1    = {
+  eu-zurich-1 = {
     centos6 = "ocid1...."
     centos7 = "ocid1...."
     oel6    = "ocid1...."
     oel7    = "ocid1...."
   }
-  me-jeddah-1    = {
+  me-jeddah-1 = {
     centos6 = "ocid1...."
     centos7 = "ocid1...."
     oel6    = "ocid1...."
     oel7    = "ocid1...."
   }
-  sa-saopaulo-1   = {
+  sa-saopaulo-1 = {
     centos6 = "ocid1...."
     centos7 = "ocid1...."
     oel6    = "ocid1...."
@@ -564,31 +574,31 @@ linux_images = {
     oel6    = "ocid1...."
     oel7    = "ocid1...."
   }
-  uk-london-1     = {
+  uk-london-1 = {
     centos6 = "ocid1...."
     centos7 = "ocid1...."
     oel6    = "ocid1...."
     oel7    = "ocid1...."
   }
-  us-ashburn-1    = {
+  us-ashburn-1 = {
     centos6 = "ocid1...."
     centos7 = "ocid1...."
     oel6    = "ocid1...."
     oel7    = "ocid1...."
   }
-  us-langley-1    = {
+  us-langley-1 = {
     centos6 = "ocid1...."
     centos7 = "ocid1...."
     oel6    = "ocid1...."
     oel7    = "ocid1...."
   }
-  us-luke-1       = {
+  us-luke-1 = {
     centos6 = "ocid1...."
     centos7 = "ocid1...."
     oel6    = "ocid1...."
     oel7    = "ocid1...."
   }
-  us-phoenix-1    = {
+  us-phoenix-1 = {
     centos6 = "ocid1...."
     centos7 = "ocid1...."
     oel6    = "ocid1...."
@@ -612,7 +622,7 @@ instance_params = {
       "client" : "hurricane",
       "department" : "hurricane"
     }
-    kms_key_name = ""
+    kms_key_name       = ""
     block_vol_att_type = "paravirtualized"
     encrypt_in_transit = true
     fd                 = 1
@@ -635,7 +645,7 @@ instance_params = {
       "client" : "hurricane",
       "department" : "hurricane"
     }
-    kms_key_name = ""
+    kms_key_name       = ""
     block_vol_att_type = "paravirtualized"
     encrypt_in_transit = true
     fd                 = 1
@@ -657,7 +667,7 @@ bv_params = {
     }
     kms_key_name       = ""
     performance        = "Balanced"
-    encrypt_in_transit = true 
+    encrypt_in_transit = true
   }
   bv11 = {
     ad            = 1
@@ -671,7 +681,7 @@ bv_params = {
     }
     kms_key_name       = ""
     performance        = "Balanced"
-    encrypt_in_transit = true 
+    encrypt_in_transit = true
   }
   bv12 = {
     ad            = 1
@@ -685,7 +695,7 @@ bv_params = {
     }
     kms_key_name       = ""
     performance        = "Balanced"
-    encrypt_in_transit = true 
+    encrypt_in_transit = true
   }
   bv13 = {
     ad            = 1
@@ -699,7 +709,7 @@ bv_params = {
     }
     kms_key_name       = ""
     performance        = "Balanced"
-    encrypt_in_transit = true 
+    encrypt_in_transit = true
   }
   bv14 = {
     ad            = 1
@@ -713,7 +723,7 @@ bv_params = {
     }
     kms_key_name       = ""
     performance        = "Balanced"
-    encrypt_in_transit = true 
+    encrypt_in_transit = true
   }
   bv15 = {
     ad            = 1
@@ -727,7 +737,7 @@ bv_params = {
     }
     kms_key_name       = ""
     performance        = "Balanced"
-    encrypt_in_transit = true 
+    encrypt_in_transit = true
   }
   bv20 = {
     ad            = 1
@@ -741,40 +751,40 @@ bv_params = {
     }
     kms_key_name       = ""
     performance        = "Balanced"
-    encrypt_in_transit = true 
+    encrypt_in_transit = true
   }
 }
 
 windows_images = {
- ap-melbourne-1  = {
+  ap-melbourne-1 = {
     win2012 = "ocid1...."
     win2016 = "ocid1...."
   }
-  ap-mumbai-1     = {
+  ap-mumbai-1 = {
     win2012 = "ocid1...."
     win2016 = "ocid1...."
   }
-  ap-osaka-1      = {
+  ap-osaka-1 = {
     win2012 = "ocid1...."
     win2016 = "ocid1...."
   }
-  ap-seoul-1     = {
+  ap-seoul-1 = {
     win2012 = "ocid1...."
     win2016 = "ocid1...."
   }
-  ap-sydney-1    = {
+  ap-sydney-1 = {
     win2012 = "ocid1...."
     win2016 = "ocid1...."
   }
-  ap-tokyo-1     = {
+  ap-tokyo-1 = {
     win2012 = "ocid1...."
     win2016 = "ocid1...."
   }
-  ca-montreal-1  = {
+  ca-montreal-1 = {
     win2012 = ""
     win2016 = ""
   }
-  ca-toronto-1   = {
+  ca-toronto-1 = {
     win2012 = "ocid1...."
     win2016 = "ocid1...."
   }
@@ -786,15 +796,15 @@ windows_images = {
     win2012 = "ocid1...."
     win2016 = "ocid1...."
   }
-  eu-zurich-1    = {
+  eu-zurich-1 = {
     win2012 = "ocid1...."
     win2016 = "ocid1...."
   }
-  me-jeddah-1    = {
+  me-jeddah-1 = {
     win2012 = "ocid1...."
     win2016 = "ocid1...."
   }
-  sa-saopaulo-1   = {
+  sa-saopaulo-1 = {
     win2012 = "ocid1...."
     win2016 = "ocid1...."
   }
@@ -802,23 +812,23 @@ windows_images = {
     win2012 = "ocid1...."
     win2016 = "ocid1...."
   }
-  uk-london-1     = {
+  uk-london-1 = {
     win2012 = "ocid1...."
     win2016 = "ocid1...."
   }
-  us-ashburn-1    = {
+  us-ashburn-1 = {
     win2012 = "ocid1...."
     win2016 = "ocid1...."
   }
-  us-langley-1    = {
+  us-langley-1 = {
     win2012 = "ocid1...."
     win2016 = "ocid1...."
   }
-  us-luke-1       = {
+  us-luke-1 = {
     win2012 = "ocid1...."
     win2016 = "ocid1...."
   }
-  us-phoenix-1    = {
+  us-phoenix-1 = {
     win2012 = "ocid1...."
     win2016 = "ocid1...."
   }
@@ -839,7 +849,7 @@ win_instance_params = {
       "client" : "hurricane",
       "department" : "hurricane"
     }
-    kms_key_name = ""
+    kms_key_name       = ""
     block_vol_att_type = "paravirtualized"
     encrypt_in_transit = false
     enable_admin       = "yes"
@@ -995,7 +1005,7 @@ lb_params = {
     subnet_names     = ["hur1pub"]
     display_name     = "hur-lb"
     is_private       = false
-    shape_details = []
+    shape_details    = []
   }
 }
 
@@ -1077,27 +1087,27 @@ zone_params = {
 
 dns_records_params = {
   "primary1.hur1.com" = {
-    zone_name     = "hur1.com"
-    domain        = "primary1.hur1.com"
-    rtype         = "A"
+    zone_name = "hur1.com"
+    domain    = "primary1.hur1.com"
+    rtype     = "A"
 
     dns_items = [
-    {
-      domain        = "primary1.hur1.com"
-      ttl           = 300
-      rdata         = null
-      rtype         = "A"
-      use_instance  = true
-      instance_name = "hur1"
-      use_lb        = null
-      lb_name       = null
-    },
+      {
+        domain        = "primary1.hur1.com"
+        ttl           = 300
+        rdata         = null
+        rtype         = "A"
+        use_instance  = true
+        instance_name = "hur1"
+        use_lb        = null
+        lb_name       = null
+      },
     ]
   }
   "primary2.hur1.com" = {
-    zone_name     = "hur1.com"
-    domain        = "primary2.hur1.com"
-    rtype         = "A"
+    zone_name = "hur1.com"
+    domain    = "primary2.hur1.com"
+    rtype     = "A"
     dns_items = [
       {
         domain        = "primary2.hur1.com"
@@ -1112,20 +1122,20 @@ dns_records_params = {
     ]
   }
   "primary3.hur1.com" = {
-    zone_name     = "hur1.com"
-    domain        = "primary3.hur1.com"
-    rtype         = "A"
+    zone_name = "hur1.com"
+    domain    = "primary3.hur1.com"
+    rtype     = "A"
 
     dns_items = [
       {
-      domain        = "primary3.hur1.com"
-      ttl           = 300
-      rdata         = "1.1.1.1"
-      rtype         = "A"
-      use_instance  = false
-      instance_name = null
-      use_lb        = false
-      lb_name       = null
+        domain        = "primary3.hur1.com"
+        ttl           = 300
+        rdata         = "1.1.1.1"
+        rtype         = "A"
+        use_instance  = false
+        instance_name = null
+        use_lb        = false
+        lb_name       = null
       },
     ]
   }

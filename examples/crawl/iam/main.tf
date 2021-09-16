@@ -11,6 +11,7 @@ provider "oci" {
 module "iam" {
   source              = "../../../modules/iam"
   comp_params         = var.comp_params
+  parent_comp         = var.parent_comp
   user_params         = var.user_params
   group_params        = var.group_params
   policy_params       = var.policy_params
