@@ -66,6 +66,9 @@ igw_params = {
 
 ngw_params = {}
 
+sgw_params = {
+}
+
 rt_params = {
   hurricane1pub = {
     display_name = "hurricane1pub"
@@ -74,6 +77,8 @@ rt_params = {
     route_rules = [
       {
         destination = "0.0.0.0/0"
+        use_sgw     = false
+        sgw_name    = null
         use_igw     = true
         igw_name    = "hurricane1"
         ngw_name    = null

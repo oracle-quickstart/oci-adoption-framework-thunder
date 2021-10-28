@@ -33,3 +33,13 @@ resource "oci_identity_dynamic_group" "this" {
   # defined_tags = each.defined_tags
   # freeform_tags = each.freeform_tags
 }
+
+resource "oci_identity_policy" "this" {
+  provider       = oci.home
+  depends_on     = [oci_identity_dynamic_group.this]
+  for_each       = var.dg_policy_params
+  name           = each.value.name
+  description    = each.value.description
+  compartment_id = var.matching_compartments[each.value.compartment_name].id
+  statements     = each.value.statements
+}

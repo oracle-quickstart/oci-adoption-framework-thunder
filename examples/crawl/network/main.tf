@@ -21,4 +21,7 @@ module "network" {
   subnet_params    = var.subnet_params
   lpg_params       = var.lpg_params
   drg_params       = var.drg_params
+  sgw_params       = var.sgw_params
 }
+
+

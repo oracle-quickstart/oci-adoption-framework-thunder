@@ -70,6 +70,16 @@ variable "ngw_params" {
   }))
 }
 
+variable "sgw_params" {
+  description = "Placeholder for vcn index association and ngw name"
+  type = map(object({
+    vcn_name     = string
+    display_name = string
+    service_name = string
+  }))
+}
+
+
 variable "rt_params" {
   description = "Placeholder for vcn index association, rt name, route rules"
   type = map(object({
@@ -79,6 +89,8 @@ variable "rt_params" {
       destination = string
       use_igw     = bool
       igw_name    = string
+      use_sgw     = bool
+      sgw_name    = string
       ngw_name    = string
     }))
   }))

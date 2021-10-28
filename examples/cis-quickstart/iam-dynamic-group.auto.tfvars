@@ -34,3 +34,23 @@ dynamic_groups = {
     matching_compartment_name = "lz-database-cmp"
   },
 }
+
+
+dg_policy_params = {
+  "lz-top-cmp-adb-kms-policy" = {
+    name             = "lz-top-cmp-adb-kms-policy"
+    description      = "Landing Zone provisioning policy ADB to access vaults and keys in lz-top-cmp compartment."
+    compartment_name = "lz-top-cmp"
+    statements = ["Allow dynamic-group lz-top-cmp-adb-dynamic-group to manage vaults in compartment lz-top-cmp",
+      "Allow dynamic-group  lz-top-cmp-adb-dynamic-group to manage keys in compartment lz-top-cmp"
+    ]
+  },
+  "lz-database-dg-admin-policy" = {
+    name             = "lz-database-dg-admin-policy"
+    description      = "Landing Zone policy for lz-database-admin-group group to manage database related resources."
+    compartment_name = "lz-top-cmp"
+    statements = ["Allow dynamic-group lz-top-cmp-adb-dynamic-group to manage vaults in compartment lz-security-cmp",
+      "Allow dynamic-group lz-top-cmp-adb-dynamic-group to manage keys in compartment lz-security-cmp"
+    ]
+  }
+}

@@ -14,3 +14,13 @@ variable "auth_provider" {
 variable "matching_compartments" {
   type = map(any)
 }
+
+
+variable "dg_policy_params" {
+  type = map(object({
+    name             = string
+    compartment_name = string
+    description      = string
+    statements       = list(string)
+  }))
+}

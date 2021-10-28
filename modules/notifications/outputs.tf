@@ -7,3 +7,9 @@ output "topics" {
     i.name => { "id" : i.topic_id, "api_endpoint" : i.api_endpoint, "short_topic_id" : i.short_topic_id }
   }
 }
+
+
+output "topic_id" {
+  value = { for i in oci_ons_notification_topic.this :
+  i.name => i.topic_id }
+}
