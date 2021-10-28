@@ -1,11 +1,11 @@
 // Copyright (c) 2021, Oracle and/or its affiliates. All rights reserved.
 // Licensed under the Universal Permissive License v 1.0 as shown at https://oss.oracle.com/licenses/upl.
 locals {
-  vcns = [for vcn in var.vcn_params: split("/", vcn.vcn_cidr)[1] < 16 || split("/", vcn.vcn_cidr)[1] > 30 ? file(format("\n\nERROR: The VCN Cidr %s for VCN %s is not between /16 and /30", vcn.vcn_cidr, vcn.display_name)) : null]
-  subnets = [for subnet in var.subnet_params: split("/", subnet.cidr_block)[1] < 16 || split("/", subnet.cidr_block)[1] > 30 ? file(format("\n\nERROR: The Subnet Cidr %s for Subnet %s is not between /16 and /30", subnet.cidr_block, subnet.display_name)) : null]
-  protocols = ["all", "1", "6", "17", "58"]
-  sec_lists_ingress = [for sec_lists in var.sl_params: [ for ingress in sec_lists.ingress_rules: contains(local.protocols, ingress.protocol) ? null : file(format("\n\nERROR: The protocol %s for the security list %s for ingress rules is not allowed. Supported options are all (all), 1 (ICMP), 6 (TCP), 17 (UDP), 58 (ICMPv6)", ingress.protocol, sec_lists.display_name))] ]
-  sec_lists_egress = [for sec_lists in var.sl_params: [ for egress in sec_lists.egress_rules: contains(local.protocols, egress.protocol) ? null : file(format("\n\nERROR: The protocol %s for the security list %s for egress rules is not allowed. Supported options are all (all), 1 (ICMP), 6 (TCP), 17 (UDP), 58 (ICMPv6)", egress.protocol, sec_lists.display_name))] ]
+  vcns              = [for vcn in var.vcn_params : split("/", vcn.vcn_cidr)[1] < 16 || split("/", vcn.vcn_cidr)[1] > 30 ? file(format("\n\nERROR: The VCN Cidr %s for VCN %s is not between /16 and /30", vcn.vcn_cidr, vcn.display_name)) : null]
+  subnets           = [for subnet in var.subnet_params : split("/", subnet.cidr_block)[1] < 16 || split("/", subnet.cidr_block)[1] > 30 ? file(format("\n\nERROR: The Subnet Cidr %s for Subnet %s is not between /16 and /30", subnet.cidr_block, subnet.display_name)) : null]
+  protocols         = ["all", "1", "6", "17", "58"]
+  sec_lists_ingress = [for sec_lists in var.sl_params : [for ingress in sec_lists.ingress_rules : contains(local.protocols, ingress.protocol) ? null : file(format("\n\nERROR: The protocol %s for the security list %s for ingress rules is not allowed. Supported options are all (all), 1 (ICMP), 6 (TCP), 17 (UDP), 58 (ICMPv6)", ingress.protocol, sec_lists.display_name))]]
+  sec_lists_egress  = [for sec_lists in var.sl_params : [for egress in sec_lists.egress_rules : contains(local.protocols, egress.protocol) ? null : file(format("\n\nERROR: The protocol %s for the security list %s for egress rules is not allowed. Supported options are all (all), 1 (ICMP), 6 (TCP), 17 (UDP), 58 (ICMPv6)", egress.protocol, sec_lists.display_name))]]
 }
 
 terraform {
@@ -38,6 +38,22 @@ resource "oci_core_nat_gateway" "ngw" {
   display_name   = each.value.display_name
 }
 
+resource "oci_core_service_gateway" "this" {
+  for_each       = var.sgw_params
+  compartment_id = oci_core_virtual_network.vcn[each.value.vcn_name].compartment_id
+
+  services {
+    service_id = data.oci_core_services.this.services.0.id
+  }
+
+  vcn_id       = oci_core_virtual_network.vcn[each.value.vcn_name].id
+  display_name = each.value.display_name
+  # route_table_id = oci_core_route_table.test_route_table.id
+}
+
+data "oci_core_services" "this" {
+}
+
 resource "oci_core_local_peering_gateway" "requestor_lpgs" {
   for_each = var.lpg_params
 
@@ -66,9 +82,11 @@ resource "oci_core_route_table" "route_table" {
     for_each = each.value.route_rules
     content {
       destination       = rr.value.destination
-      network_entity_id = rr.value.use_igw ? oci_core_internet_gateway.igw[lookup(rr.value, "igw_name", null)].id : oci_core_nat_gateway.ngw[lookup(rr.value, "ngw_name", null)].id
+      destination_type  = rr.value.use_sgw ? "SERVICE_CIDR_BLOCK" : null
+      network_entity_id = rr.value.use_igw ? oci_core_internet_gateway.igw[lookup(rr.value, "igw_name", null)].id : rr.value.use_sgw ? oci_core_service_gateway.this[lookup(rr.value, "sgw_name", null)].id : oci_core_nat_gateway.ngw[lookup(rr.value, "ngw_name", null)].id
     }
   }
+
 
   dynamic "route_rules" {
     iterator = lpg_rr
@@ -89,13 +107,13 @@ resource "oci_core_route_table" "route_table" {
 
   dynamic "route_rules" {
     iterator = lpg_rr
-    
+
     for_each = [for lpg in var.lpg_params :
       {
         "cidr" : var.vcn_params[lpg.acceptor].vcn_cidr,
         "lpg_id" : oci_core_local_peering_gateway.requestor_lpgs[lpg.display_name].id
       }
-      if lpg.requestor == each.value.vcn_name 
+      if lpg.requestor == each.value.vcn_name
     ]
 
     content {
@@ -107,7 +125,7 @@ resource "oci_core_route_table" "route_table" {
   dynamic "route_rules" {
     iterator = drg_rr
 
-    for_each = [ for drg in var.drg_params :
+    for_each = [for drg in var.drg_params :
       {
         "cidr" : drg.cidr_rt,
         "drg_id" : oci_core_drg.this[drg.name].id
@@ -160,7 +178,6 @@ resource "oci_core_security_list" "sl" {
           min = tcp_options.value.min
         }
       }
-
       dynamic "udp_options" {
         iterator = udp_options
         for_each = (lookup(ingress_rules.value, "udp_options", null) != null) ? ingress_rules.value.udp_options : []
@@ -188,10 +205,10 @@ resource "oci_core_network_security_group_security_rule" "nsg_rules" {
   stateless                 = each.value.stateless
   direction                 = each.value.direction
 
-  source      = each.value.direction == "INGRESS" ? each.value.source : null
+  source      = each.value.direction == "INGRESS" ? each.value.source_type == "NETWORK_SECURITY_GROUP" ? oci_core_network_security_group.nsg[each.value.source].id : each.value.source : null
   source_type = each.value.direction == "INGRESS" ? each.value.source_type : null
 
-  destination      = each.value.direction == "EGRESS" ? each.value.destination : null
+  destination      = each.value.direction == "EGRESS" ? each.value.destination_type == "NETWORK_SECURITY_GROUP" ? oci_core_network_security_group.nsg[each.value.destination].id : each.value.destination : null
   destination_type = each.value.direction == "EGRESS" ? each.value.destination_type : null
 
 
@@ -264,7 +281,7 @@ resource "oci_core_drg" "this" {
 }
 
 resource "oci_core_drg_attachment" "this" {
-  for_each       = var.drg_params
-  drg_id         = oci_core_drg.this[each.value.name].id
-  vcn_id         = oci_core_virtual_network.vcn[each.value.vcn_name].id
+  for_each = var.drg_params
+  drg_id   = oci_core_drg.this[each.value.name].id
+  vcn_id   = oci_core_virtual_network.vcn[each.value.vcn_name].id
 }

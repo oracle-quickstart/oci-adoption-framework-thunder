@@ -20,10 +20,13 @@ policy_params = {
   "lz-top-cmp-provisioning-policy" = {
     name             = "lz-top-cmp-provisioning-policy"
     description      = "Landing Zone provisioning policy for lz-top-cmp compartment."
-    compartment_name = ""
+    compartment_name = "g"
     statements       = ["Allow group lz-top-cmp-provisioning-group to manage all-resources in compartment lz-top-cmp"]
   }
 }
+
+
+
 
 policy_params2 = {
   "lz-mgmt-root-policy" = {
@@ -82,14 +85,6 @@ policy_params2 = {
       "Allow group lz-auditor-group to use cloud-shell in tenancy",
       "Allow group lz-announcement-reader-group to read announcements in tenancy",
       "Allow group lz-announcement-reader-group to use cloud-shell in tenancy"
-    ]
-  },
-  "lz-top-cmp-adb-kms-policy" = {
-    name             = "lz-top-cmp-adb-kms-policy"
-    description      = "Landing Zone provisioning policy ADB to access vaults and keys in lz-top-cmp compartment."
-    compartment_name = "lz-top-cmp"
-    statements = ["Allow dynamic-group lz-top-cmp-adb-dynamic-group to manage vaults in compartment lz-top-cmp",
-      "Allow dynamic-group  lz-top-cmp-adb-dynamic-group to manage keys in compartment lz-top-cmp"
     ]
   },
   "lz-security-admin-root-policy" = {
@@ -197,13 +192,13 @@ policy_params2 = {
     name             = "lz-security-admin-policy"
     description      = "Landing Zone policy for lz-security-admin-group group to manage security related services in Landing Zone enclosing compartment (lz-top-cmp)."
     compartment_name = "lz-top-cmp"
-    statements = ["Allow group lz-security-admin-group to manage tag-namespaces in lz-top-cmp",
-      "Allow group lz-security-admin-group to manage tag-defaults in lz-top-cmp",
-      "Allow group lz-security-admin-group to manage repos in lz-top-cmp",
-      "Allow group lz-security-admin-group to read audit-events in lz-top-cmp",
-      "Allow group lz-security-admin-group to read app-catalog-listing in lz-top-cmp",
-      "Allow group lz-security-admin-group to read instance-images in lz-top-cmp",
-      "Allow group lz-security-admin-group to inspect buckets in lz-top-cmp",
+    statements = ["Allow group lz-security-admin-group to manage tag-namespaces in compartment lz-top-cmp",
+      "Allow group lz-security-admin-group to manage tag-defaults in compartment lz-top-cmp",
+      "Allow group lz-security-admin-group to manage repos in compartment lz-top-cmp",
+      "Allow group lz-security-admin-group to read audit-events in compartment lz-top-cmp",
+      "Allow group lz-security-admin-group to read app-catalog-listing in compartment lz-top-cmp",
+      "Allow group lz-security-admin-group to read instance-images in compartment lz-top-cmp",
+      "Allow group lz-security-admin-group to inspect buckets in compartment lz-top-cmp",
       "Allow group lz-security-admin-group to read all-resources in compartment lz-security-cmp",
       "Allow group lz-security-admin-group to manage instance-family in compartment lz-security-cmp",
       "Allow group lz-security-admin-group to manage vaults in compartment lz-security-cmp",
@@ -249,9 +244,7 @@ policy_params2 = {
       "Allow group lz-database-admin-group to read audit-events in compartment lz-database-cmp",
       "Allow group lz-database-admin-group to read vss-family in compartment lz-security-cmp",
       "Allow group lz-database-admin-group to read vaults in compartment lz-security-cmp",
-      "Allow group lz-database-admin-group to inspect keys in compartment lz-security-cmp",
-      "Allow dynamic-group lz-top-cmp-adb-dynamic-group to manage vaults in compartment lz-security-cmp",
-      "Allow dynamic-group lz-top-cmp-adb-dynamic-group to manage keys in compartment lz-security-cmp"
+      "Allow group lz-database-admin-group to inspect keys in compartment lz-security-cmp"
     ]
   },
   "lz-appdev-admin-policy" = {
@@ -279,11 +272,11 @@ policy_params2 = {
       "Allow group lz-appdev-admin-group to read database-family in compartment lz-database-cmp",
       "Allow group lz-appdev-admin-group to read vaults in compartment lz-security-cmp",
       "Allow group lz-appdev-admin-group to inspect keys in compartment lz-security-cmp",
-      "Allow group lz-appdev-admin-group to read app-catalog-listing in lz-top-cmp",
+      "Allow group lz-appdev-admin-group to read app-catalog-listing in compartment lz-top-cmp",
       "Allow group lz-appdev-admin-group to manage instance-images in compartment lz-security-cmp",
-      "Allow group lz-appdev-admin-group to read instance-images in lz-top-cmp",
+      "Allow group lz-appdev-admin-group to read instance-images in compartment lz-top-cmp",
       "Allow group lz-appdev-admin-group to manage repos in compartment lz-appdev-cmp",
-      "Allow group lz-appdev-admin-group to read repos in lz-top-cmp",
+      "Allow group lz-appdev-admin-group to read repos in compartment lz-top-cmp",
       "Allow group lz-appdev-admin-group to manage orm-stacks in compartment lz-appdev-cmp",
       "Allow group lz-appdev-admin-group to manage orm-jobs in compartment lz-appdev-cmp",
       "Allow group lz-appdev-admin-group to manage orm-config-source-providers in compartment lz-appdev-cmp",
@@ -295,13 +288,13 @@ policy_params2 = {
     name             = "lz-iam-admin-policy"
     description      = "Landing Zone policy for lz-iam-admin-group group to manage IAM resources in Landing Zone enclosing compartment (lz-top-cmp)."
     compartment_name = "lz-top-cmp"
-    statements = ["Allow group lz-iam-admin-group to manage policies in lz-top-cmp",
-      "Allow group lz-iam-admin-group to manage compartments in lz-top-cmp",
-      "Allow group lz-iam-admin-group to manage tag-defaults in lz-top-cmp",
-      "Allow group lz-iam-admin-group to manage tag-namespaces in lz-top-cmp",
-      "Allow group lz-iam-admin-group to manage orm-stacks in lz-top-cmp",
-      "Allow group lz-iam-admin-group to manage orm-jobs in lz-top-cmp",
-      "Allow group lz-iam-admin-group to manage orm-config-source-providers in lz-top-cmp"
+    statements = ["Allow group lz-iam-admin-group to manage policies in compartment lz-top-cmp",
+      "Allow group lz-iam-admin-group to manage compartments in compartment lz-top-cmp",
+      "Allow group lz-iam-admin-group to manage tag-defaults in compartment lz-top-cmp",
+      "Allow group lz-iam-admin-group to manage tag-namespaces in compartment lz-top-cmp",
+      "Allow group lz-iam-admin-group to manage orm-stacks in compartment lz-top-cmp",
+      "Allow group lz-iam-admin-group to manage orm-jobs in compartment lz-top-cmp",
+      "Allow group lz-iam-admin-group to manage orm-config-source-providers in compartment lz-top-cmp"
     ]
   },
   "lz-services-policy" = {

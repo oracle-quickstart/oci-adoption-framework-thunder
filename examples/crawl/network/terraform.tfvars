@@ -42,6 +42,9 @@ ngw_params = {
   }
 }
 
+sgw_params = {
+}
+
 rt_params = {
   hurricane1pub = {
     display_name = "hurricane1pub"
@@ -50,6 +53,8 @@ rt_params = {
     route_rules = [
       {
         destination = "0.0.0.0/0"
+        use_sgw     = false
+        sgw_name    = null
         use_igw     = true
         igw_name    = "hurricane1"
         ngw_name    = null
@@ -63,6 +68,8 @@ rt_params = {
     route_rules = [
       {
         destination = "0.0.0.0/0"
+        use_sgw     = false
+        sgw_name    = null
         use_igw     = false
         igw_name    = null
         ngw_name    = "hurricane1"
@@ -76,6 +83,8 @@ rt_params = {
     route_rules = [
       {
         destination = "0.0.0.0/0"
+        use_sgw     = false
+        sgw_name    = null
         use_igw     = true
         ngw_name    = null
         igw_name    = "hurricane2"
@@ -89,6 +98,8 @@ rt_params = {
     route_rules = [
       {
         destination = "0.0.0.0/0"
+        use_sgw     = false
+        sgw_name    = null
         use_igw     = false
         ngw_name    = "hurricane2"
         igw_name    = null

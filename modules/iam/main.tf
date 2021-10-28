@@ -59,11 +59,12 @@ resource "oci_identity_user_group_membership" "this" {
 
 
 resource "oci_identity_policy" "this" {
-  provider       = oci.home
-  depends_on     = [oci_identity_group.this]
-  for_each       = var.policy_params
-  name           = each.value.name
-  description    = each.value.description
-  compartment_id = length(each.value.compartment_name) > 0 ? var.parent_comp[each.value.compartment_name].id : var.auth_provider.tenancy
+  provider    = oci.home
+  depends_on  = [oci_identity_group.this]
+  for_each    = var.policy_params
+  name        = each.value.name
+  description = each.value.description
+  #compartment_id = length(each.value.compartment_name) > 0 ? var.parent_comp[each.value.compartment_name].id : var.auth_provider.tenancy
+  compartment_id = length(each.value.compartment_name) > 0 ? var.parent_comp == "" ? var.auth_provider.tenancy : var.parent_comp[each.value.compartment_name].id : var.auth_provider.tenancy
   statements     = each.value.statements
 }
