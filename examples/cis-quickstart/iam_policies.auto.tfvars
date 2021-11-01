@@ -20,7 +20,7 @@ policy_params = {
   "lz-top-cmp-provisioning-policy" = {
     name             = "lz-top-cmp-provisioning-policy"
     description      = "Landing Zone provisioning policy for lz-top-cmp compartment."
-    compartment_name = "g"
+    compartment_name = ""
     statements       = ["Allow group lz-top-cmp-provisioning-group to manage all-resources in compartment lz-top-cmp"]
   }
 }

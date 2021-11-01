@@ -2,20 +2,20 @@
 // Licensed under the Universal Permissive License v 1.0 as shown at https://oss.oracle.com/licenses/upl.
 
 
-# locals {
-#   kms_policy = {
-#     "lz-oss-key-policy" = {
-#       name             = "lz-oss-key-policy"
-#       compartment_name = "lz-top-cmp"
-#       description      = "Landing Zone policy for OCI services to access Vault service."
-#       statements = [
-#         "Allow service objectstorage-${var.provider_oci.region} to use keys in compartment lz-security-cmp where target.key.id = '${module.kms.kms_key_ids["lz-oss-key"]}'",
-#         "Allow group lz-database-admin-group to use key-delegate in compartment lz-security-cmp where target.key.id = '${module.kms.kms_key_ids["lz-oss-key"]}'",
-#         "Allow group lz-appdev-admin-group to use key-delegate in compartment lz-security-cmp where target.key.id = '${module.kms.kms_key_ids["lz-oss-key"]}'"
-#       ]
-#     }
-#   }
-# }
+locals {
+  kms_policy = {
+    "lz-oss-key-policy" = {
+      name             = "lz-oss-key-policy"
+      compartment_name = "lz-top-cmp"
+      description      = "Landing Zone policy for OCI services to access Vault service."
+      statements = [
+        "Allow service objectstorage-${var.provider_oci.region} to use keys in compartment lz-security-cmp where target.key.id = '${module.kms.kms_key_ids["lz-oss-key"]}'",
+        "Allow group lz-database-admin-group to use key-delegate in compartment lz-security-cmp where target.key.id = '${module.kms.kms_key_ids["lz-oss-key"]}'",
+        "Allow group lz-appdev-admin-group to use key-delegate in compartment lz-security-cmp where target.key.id = '${module.kms.kms_key_ids["lz-oss-key"]}'"
+      ]
+    }
+  }
+}
 
 
 
@@ -86,26 +86,26 @@ module "object-storage" {
   compartments  = module.iam.compartments
   bucket_params = var.bucket_params
   oci_provider  = var.provider_oci
-  kms_key_ids   = {}
+  kms_key_ids   = module.kms.kms_key_ids
 }
 
-# module "kms" {
-#   source          = "../../modules/kms"
-#   compartment_ids = module.iam.compartments
-#   vault_params    = var.vault_params
-#   key_params      = var.key_params
-# }
+module "kms" {
+  source          = "../../modules/kms"
+  compartment_ids = module.iam.compartments
+  vault_params    = var.vault_params
+  key_params      = var.key_params
+}
 
 
-# module "kms_policy" {
-#   source        = "../../modules/iam"
-#   comp_params   = {}
-#   parent_comp   = module.iam_top_comp.compartment_maps
-#   user_params   = {}
-#   group_params  = {}
-#   policy_params = local.kms_policy
-#   auth_provider = var.provider_oci
-# }
+module "kms_policy" {
+  source        = "../../modules/iam"
+  comp_params   = {}
+  parent_comp   = module.iam_top_comp.compartment_maps
+  user_params   = {}
+  group_params  = {}
+  policy_params = local.kms_policy
+  auth_provider = var.provider_oci
+}
 
 module "logs" {
   source           = "../../modules/logging"
@@ -138,8 +138,8 @@ module "cloud_guard" {
   source                      = "../../modules/cloud_guard"
   cloud_guard_config          = var.cloud_guard_config
   cloud_guard_target          = var.cloud_guard_target
-  compartments                = module.iam.compartments
-  cloud_guard_target_resource = module.iam.compartments
+  compartments                = var.provider_oci
+  cloud_guard_target_resource = var.provider_oci
   auth_provider               = var.provider_oci
 }
 

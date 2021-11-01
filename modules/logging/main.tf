@@ -21,7 +21,7 @@ resource "oci_logging_log" "this" {
       service     = each.value.source_service
       source_type = each.value.source_type
     }
-    compartment_id = var.compartments[each.value.comp_name]
+    compartment_id = var.compartments[each.value.target_comp_name]
   }
   is_enabled         = each.value.is_enabled
   retention_duration = each.value.retention_duration

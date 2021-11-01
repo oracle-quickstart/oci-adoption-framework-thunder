@@ -1,21 +1,6 @@
 // Copyright (c) 2021, Oracle and/or its affiliates. All rights reserved.
 // Licensed under the Universal Permissive License v 1.0 as shown at https://oss.oracle.com/licenses/upl.
 
-data "oci_cloud_guard_detector_recipes" "existing" {
-  depends_on     = [oci_cloud_guard_cloud_guard_configuration.this]
-  compartment_id = var.compartments["lz-security-cmp"]
-}
-
-data "oci_cloud_guard_responder_recipes" "existing" {
-  depends_on     = [oci_cloud_guard_cloud_guard_configuration.this]
-  compartment_id = var.compartments["lz-security-cmp"]
-}
-
-
-data "oci_cloud_guard_cloud_guard_configuration" "this" {
-  compartment_id = var.compartments["lz-security-cmp"]
-}
-
 
 provider "oci" {
   tenancy_ocid     = var.auth_provider.tenancy
@@ -36,6 +21,24 @@ data "oci_identity_regions" "existing" {
     values = [data.oci_identity_tenancy.existing.home_region_key]
   }
 }
+
+data "oci_cloud_guard_detector_recipes" "existing" {
+  depends_on     = [oci_cloud_guard_cloud_guard_configuration.this]
+  compartment_id = var.compartments["tenancy"]
+}
+
+data "oci_cloud_guard_responder_recipes" "existing" {
+  depends_on     = [oci_cloud_guard_cloud_guard_configuration.this]
+  compartment_id = var.compartments["tenancy"]
+}
+
+
+data "oci_cloud_guard_cloud_guard_configuration" "this" {
+  compartment_id = var.compartments["tenancy"]
+}
+
+
+
 
 
 resource "oci_cloud_guard_cloud_guard_configuration" "this" {

@@ -1,27 +1,21 @@
 // Copyright (c) 2021, Oracle and/or its affiliates. All rights reserved.
 // Licensed under the Universal Permissive License v 1.0 as shown at https://oss.oracle.com/licenses/upl.
 
-##########Variabila de sters
 
-parent_comp = {
-  g = {
-    "name" = "g"
-    #"id"   = "ocid1.compartment.oc1..aaaaaaaayspffvihh6n3n7mcrgukjdgbnx4dnfdlc2czloijiyzyqjov5a7q"
-    "id" = "ocid1.compartment.oc1..aaaaaaaagrabkopwvu74dho7jpma2qvbsukj2yibwzetwoyykhlqt2mfwsjq"
-  }
-}
 
-# parent_comp = {}
+parent_comp = {}
+
+
 user_params = {}
-# group_params  = {}
+
 policy_params = {}
-#####Modificat enable delete pe false
+
 comp_params = {
   lz-top-cmp = {
     name          = "lz-top-cmp"
     description   = "The lz-top-cmp compartment will be created under tenancy and will include all the other resources."
     enable_delete = false
-    parent_name   = "g"
+    parent_name   = ""
   }
 }
 

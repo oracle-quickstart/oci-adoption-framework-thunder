@@ -307,7 +307,7 @@ variable "log_params" {
     source_resource     = string
     source_service      = string
     source_type         = string
-    comp_name           = string
+    target_comp_name    = string
     is_enabled          = bool
     retention_duration  = number
   }))

@@ -1,10 +1,11 @@
-
+// Copyright (c) 2021, Oracle and/or its affiliates. All rights reserved.
+// Licensed under the Universal Permissive License v 1.0 as shown at https://oss.oracle.com/licenses/upl.
 
 events_params = {
   "lz-notify-on-iam-changes-rule" = {
     rule_display_name = "lz-notify-on-iam-changes-rule"
     rule_is_enabled   = true
-    compartment_name  = "lz-top-cmp"
+    compartment_name  = "tenancy"
     freeform_tags     = {}
     action_params = [{
       action_type         = "ONS"

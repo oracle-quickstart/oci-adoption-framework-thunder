@@ -18,13 +18,13 @@ topic_params = {
 subscription_params = {
   subscription1 = {
     comp_name  = "lz-security-cmp"
-    endpoint   = "gabriel.feodorov@oracle.com"
+    endpoint   = "testemail@test.com"
     protocol   = "EMAIL"
     topic_name = "lz-security-topic"
   }
   subscription2 = {
     comp_name  = "lz-security-cmp"
-    endpoint   = "gabriel.feodorov@oracle.com"
+    endpoint   = "testemail@test.com"
     protocol   = "EMAIL"
     topic_name = "lz-network-topic"
   }
