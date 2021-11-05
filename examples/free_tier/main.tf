@@ -11,6 +11,7 @@ provider "oci" {
 module "iam" {
   source        = "../../modules/iam"
   comp_params   = var.comp_params
+  parent_comp   = var.parent_comp
   user_params   = var.user_params
   group_params  = var.group_params
   policy_params = var.policy_params
@@ -30,6 +31,7 @@ module "network" {
   subnet_params    = var.subnet_params
   lpg_params       = var.lpg_params
   drg_params       = var.drg_params
+  sgw_params       = var.sgw_params
 }
 
 module "adw" {

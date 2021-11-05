@@ -7,6 +7,7 @@ comp_params = {
     name          = "sandbox"
     description   = "The sandbox compartment contains crawl, walk, run resources for the framework including IAM."
     enable_delete = false
+    parent_name   = ""
   }
 }
 
@@ -27,9 +28,10 @@ group_params = {
 
 policy_params = {
   "Root_IAMAdminManagers.pl" = {
-    name           = "Root_IAMAdminManagers.pl"
-    description    = "Root_IAMAdminManagers.pl"
-    compartment_id = "ocid1...."
+    name = "Root_IAMAdminManagers.pl"
+    #Leave compartment_name empty to create resources at the tenancy level.
+    compartment_name = ""
+    description      = "Root_IAMAdminManagers.pl"
 
     statements = [
       "ALLOW GROUP Root_IAMAdminManagers.grp to read users IN TENANCY",
@@ -64,6 +66,9 @@ igw_params = {
 
 ngw_params = {}
 
+sgw_params = {
+}
+
 rt_params = {
   hurricane1pub = {
     display_name = "hurricane1pub"
@@ -72,6 +77,8 @@ rt_params = {
     route_rules = [
       {
         destination = "0.0.0.0/0"
+        use_sgw     = false
+        sgw_name    = null
         use_igw     = true
         igw_name    = "hurricane1"
         ngw_name    = null
@@ -178,49 +185,49 @@ adw_params = {
 
 #------------ Compute --------------
 linux_images = {
-  ap-melbourne-1  = {
+  ap-melbourne-1 = {
     centos6 = "ocid1...."
     centos7 = "ocid1...."
     oel6    = "ocid1...."
     oel7    = "ocid1...."
   }
-  ap-mumbai-1     = {
+  ap-mumbai-1 = {
     centos6 = "ocid1...."
     centos7 = "ocid1...."
     oel6    = "ocid1...."
     oel7    = "ocid1...."
   }
-  ap-osaka-1      = {
+  ap-osaka-1 = {
     centos6 = "ocid1...."
     centos7 = "ocid1...."
     oel6    = "ocid1...."
     oel7    = "ocid1...."
   }
-  ap-seoul-1     = {
+  ap-seoul-1 = {
     centos6 = "ocid1...."
     centos7 = "ocid1...."
     oel6    = "ocid1...."
     oel7    = "ocid1...."
   }
-  ap-sydney-1    = {
+  ap-sydney-1 = {
     centos6 = "ocid1...."
     centos7 = "ocid1...."
     oel6    = "ocid1...."
     oel7    = "ocid1...."
   }
-  ap-tokyo-1     = {
+  ap-tokyo-1 = {
     centos6 = "ocid1...."
     centos7 = "ocid1...."
     oel6    = "ocid1...."
     oel7    = "ocid1...."
   }
-  ca-montreal-1  = {
+  ca-montreal-1 = {
     centos6 = "ocid1...."
     centos7 = "ocid1...."
     oel6    = "ocid1...."
     oel7    = "ocid1...."
   }
-  ca-toronto-1   = {
+  ca-toronto-1 = {
     centos6 = "ocid1...."
     centos7 = "ocid1...."
     oel6    = "ocid1...."
@@ -238,19 +245,19 @@ linux_images = {
     oel6    = "ocid1...."
     oel7    = "ocid1...."
   }
-  eu-zurich-1    = {
+  eu-zurich-1 = {
     centos6 = "ocid1...."
     centos7 = "ocid1...."
     oel6    = "ocid1...."
     oel7    = "ocid1...."
   }
-  me-jeddah-1    = {
+  me-jeddah-1 = {
     centos6 = "ocid1...."
     centos7 = "ocid1...."
     oel6    = "ocid1...."
     oel7    = "ocid1...."
   }
-  sa-saopaulo-1   = {
+  sa-saopaulo-1 = {
     centos6 = "ocid1...."
     centos7 = "ocid1...."
     oel6    = "ocid1...."
@@ -262,31 +269,31 @@ linux_images = {
     oel6    = "ocid1...."
     oel7    = "ocid1...."
   }
-  uk-london-1     = {
+  uk-london-1 = {
     centos6 = "ocid1...."
     centos7 = "ocid1...."
     oel6    = "ocid1...."
     oel7    = "ocid1...."
   }
-  us-ashburn-1    = {
+  us-ashburn-1 = {
     centos6 = "ocid1...."
     centos7 = "ocid1...."
     oel6    = "ocid1...."
     oel7    = "ocid1...."
   }
-  us-langley-1    = {
+  us-langley-1 = {
     centos6 = "ocid1...."
     centos7 = "ocid1...."
     oel6    = "ocid1...."
     oel7    = "ocid1...."
   }
-  us-luke-1       = {
+  us-luke-1 = {
     centos6 = "ocid1...."
     centos7 = "ocid1...."
     oel6    = "ocid1...."
     oel7    = "ocid1...."
   }
-  us-phoenix-1    = {
+  us-phoenix-1 = {
     centos6 = "ocid1...."
     centos7 = "ocid1...."
     oel6    = "ocid1...."
@@ -310,7 +317,7 @@ instance_params = {
       "client" : "hurricane",
       "department" : "hurricane"
     }
-    kms_key_name = ""
+    kms_key_name       = ""
     block_vol_att_type = "paravirtualized"
     encrypt_in_transit = false
     fd                 = 1

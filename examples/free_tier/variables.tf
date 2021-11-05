@@ -9,7 +9,14 @@ variable "comp_params" {
     name          = string
     description   = string
     enable_delete = bool
+    parent_name   = string
   }))
+}
+
+variable "parent_comp" {
+  type        = map(any)
+  default     = {}
+  description = "Leave it empty if you want to create compartments under tenancy"
 }
 
 variable "user_params" {
@@ -29,10 +36,10 @@ variable "group_params" {
 
 variable "policy_params" {
   type = map(object({
-    name           = string
-    description    = string
-    compartment_id = string
-    statements     = list(string)
+    name             = string
+    compartment_name = string
+    description      = string
+    statements       = list(string)
   }))
 }
 
@@ -63,6 +70,16 @@ variable "ngw_params" {
   }))
 }
 
+variable "sgw_params" {
+  description = "Placeholder for vcn index association and ngw name"
+  type = map(object({
+    vcn_name     = string
+    display_name = string
+    service_name = string
+  }))
+}
+
+
 variable "rt_params" {
   description = "Placeholder for vcn index association, rt name, route rules"
   type = map(object({
@@ -72,6 +89,8 @@ variable "rt_params" {
       destination = string
       use_igw     = bool
       igw_name    = string
+      use_sgw     = bool
+      sgw_name    = string
       ngw_name    = string
     }))
   }))
