@@ -188,7 +188,14 @@ variable "drg_params" {
   type = map(object({
     name     = string
     vcn_name = string
-    cidr_rt  = string
+  }))
+}
+
+variable "drg_attachment_params" {
+  type = map(object({
+    drg_name = string
+    vcn_name = string
+    cidr_rt  = list(string)
     rt_names = list(string)
   }))
 }

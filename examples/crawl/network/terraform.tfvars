@@ -326,3 +326,5 @@ lpg_params = {
 }
 
 drg_params = {}
+
+drg_attachment_params = {}

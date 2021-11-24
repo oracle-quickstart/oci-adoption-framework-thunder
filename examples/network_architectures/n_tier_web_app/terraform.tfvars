@@ -157,7 +157,13 @@ drg_params = {
   ntier_drg = {
     name     = "ntier_drg"
     vcn_name = "ntier"
-    cidr_rt  = "192.0.0.0/24"
+  }
+}
+drg_attachment_params = {
+  ntier_drg_attachment = {
+    drg_name = "ntier_drg"
+    vcn_name = "ntier"
+    cidr_rt  = ["192.0.0.0/24"]
     rt_names = ["ntier_priv_rt"]
   }
 }
@@ -175,49 +181,49 @@ ipsec_params = {
 
 #------------ Compute --------------
 linux_images = {
-  ap-melbourne-1  = {
+  ap-melbourne-1 = {
     centos6 = "ocid1...."
     centos7 = "ocid1...."
     oel6    = "ocid1...."
     oel7    = "ocid1...."
   }
-  ap-mumbai-1     = {
+  ap-mumbai-1 = {
     centos6 = "ocid1...."
     centos7 = "ocid1...."
     oel6    = "ocid1...."
     oel7    = "ocid1...."
   }
-  ap-osaka-1      = {
+  ap-osaka-1 = {
     centos6 = "ocid1...."
     centos7 = "ocid1...."
     oel6    = "ocid1...."
     oel7    = "ocid1...."
   }
-  ap-seoul-1     = {
+  ap-seoul-1 = {
     centos6 = "ocid1...."
     centos7 = "ocid1...."
     oel6    = "ocid1...."
     oel7    = "ocid1...."
   }
-  ap-sydney-1    = {
+  ap-sydney-1 = {
     centos6 = "ocid1...."
     centos7 = "ocid1...."
     oel6    = "ocid1...."
     oel7    = "ocid1...."
   }
-  ap-tokyo-1     = {
+  ap-tokyo-1 = {
     centos6 = "ocid1...."
     centos7 = "ocid1...."
     oel6    = "ocid1...."
     oel7    = "ocid1...."
   }
-  ca-montreal-1  = {
+  ca-montreal-1 = {
     centos6 = "ocid1...."
     centos7 = "ocid1...."
     oel6    = "ocid1...."
     oel7    = "ocid1...."
   }
-  ca-toronto-1   = {
+  ca-toronto-1 = {
     centos6 = "ocid1...."
     centos7 = "ocid1...."
     oel6    = "ocid1...."
@@ -235,19 +241,19 @@ linux_images = {
     oel6    = "ocid1...."
     oel7    = "ocid1...."
   }
-  eu-zurich-1    = {
+  eu-zurich-1 = {
     centos6 = "ocid1...."
     centos7 = "ocid1...."
     oel6    = "ocid1...."
     oel7    = "ocid1...."
   }
-  me-jeddah-1    = {
+  me-jeddah-1 = {
     centos6 = "ocid1...."
     centos7 = "ocid1...."
     oel6    = "ocid1...."
     oel7    = "ocid1...."
   }
-  sa-saopaulo-1   = {
+  sa-saopaulo-1 = {
     centos6 = "ocid1...."
     centos7 = "ocid1...."
     oel6    = "ocid1...."
@@ -259,31 +265,31 @@ linux_images = {
     oel6    = "ocid1...."
     oel7    = "ocid1...."
   }
-  uk-london-1     = {
+  uk-london-1 = {
     centos6 = "ocid1...."
     centos7 = "ocid1...."
     oel6    = "ocid1...."
     oel7    = "ocid1...."
   }
-  us-ashburn-1    = {
+  us-ashburn-1 = {
     centos6 = "ocid1...."
     centos7 = "ocid1...."
     oel6    = "ocid1...."
     oel7    = "ocid1...."
   }
-  us-langley-1    = {
+  us-langley-1 = {
     centos6 = "ocid1...."
     centos7 = "ocid1...."
     oel6    = "ocid1...."
     oel7    = "ocid1...."
   }
-  us-luke-1       = {
+  us-luke-1 = {
     centos6 = "ocid1...."
     centos7 = "ocid1...."
     oel6    = "ocid1...."
     oel7    = "ocid1...."
   }
-  us-phoenix-1    = {
+  us-phoenix-1 = {
     centos6 = "ocid1...."
     centos7 = "ocid1...."
     oel6    = "ocid1...."
