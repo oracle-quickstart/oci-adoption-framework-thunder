@@ -9,18 +9,19 @@ provider "oci" {
 }
 
 module "network" {
-  source           = "../../../modules/network"
-  vcn_params       = var.vcn_params
-  compartment_ids  = var.compartment_ids
-  igw_params       = var.igw_params
-  ngw_params       = var.ngw_params
-  rt_params        = var.rt_params
-  sl_params        = var.sl_params
-  nsg_params       = var.nsg_params
-  nsg_rules_params = var.nsg_rules_params
-  subnet_params    = var.subnet_params
-  lpg_params       = var.lpg_params
-  drg_params       = var.drg_params
+  source                = "../../../modules/network"
+  vcn_params            = var.vcn_params
+  compartment_ids       = var.compartment_ids
+  igw_params            = var.igw_params
+  ngw_params            = var.ngw_params
+  rt_params             = var.rt_params
+  sl_params             = var.sl_params
+  nsg_params            = var.nsg_params
+  nsg_rules_params      = var.nsg_rules_params
+  subnet_params         = var.subnet_params
+  lpg_params            = var.lpg_params
+  drg_params            = var.drg_params
+  drg_attachment_params = var.drg_attachment_params
 }
 
 

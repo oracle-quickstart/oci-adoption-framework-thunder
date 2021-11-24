@@ -125,13 +125,13 @@ resource "oci_core_route_table" "route_table" {
   dynamic "route_rules" {
     iterator = drg_rr
 
-    for_each = [for drg in var.drg_params :
+    for_each = flatten([for drg in var.drg_attachment_params : [for cidr in drg.cidr_rt :
       {
-        "cidr" : drg.cidr_rt,
-        "drg_id" : oci_core_drg.this[drg.name].id
+        "cidr" : cidr,
+        "drg_id" : oci_core_drg.this[drg.drg_name].id
       }
       if contains(drg.rt_names, each.value.display_name)
-    ]
+    ]])
 
     content {
       destination       = drg_rr.value.cidr
@@ -280,8 +280,9 @@ resource "oci_core_drg" "this" {
   display_name   = each.value.name
 }
 
+
 resource "oci_core_drg_attachment" "this" {
-  for_each = var.drg_params
-  drg_id   = oci_core_drg.this[each.value.name].id
+  for_each = var.drg_attachment_params
+  drg_id   = oci_core_drg.this[each.value.drg_name].id
   vcn_id   = oci_core_virtual_network.vcn[each.value.vcn_name].id
 }

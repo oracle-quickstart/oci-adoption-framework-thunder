@@ -189,19 +189,37 @@ drg_params = {
   mgmt_drg = {
     name     = "mgmt_drg"
     vcn_name = "mgmt_vcn"
-    cidr_rt  = "192.0.0.0/16"
-    rt_names = ["mgmt_rt"]
+
   }
   customerA_drg = {
     name     = "customerA_drg"
     vcn_name = "customerA_vcn"
-    cidr_rt  = "192.10.0.0/16"
-    rt_names = ["customerA_rt"]
+
   }
   customerB_drg = {
     name     = "customerB_drg"
     vcn_name = "customerB_vcn"
-    cidr_rt  = "192.20.0.0/16"
+
+  }
+}
+
+drg_attachment_params = {
+  mgmt_drg_attachment = {
+    drg_name = "mgmt_drg"
+    vcn_name = "mgmt_vcn"
+    cidr_rt  = ["192.0.0.0/16"]
+    rt_names = ["mgmt_rt"]
+  },
+  customerA_drg_attachment = {
+    drg_name = "customerA_drg"
+    vcn_name = "customerA_vcn"
+    cidr_rt  = ["192.10.0.0/16"]
+    rt_names = ["customerA_rt"]
+  },
+  customerB_drg_attachment = {
+    drg_name = "customerB_drg"
+    vcn_name = "customerB_vcn"
+    cidr_rt  = ["192.20.0.0/16"]
     rt_names = ["customerB_rt"]
   }
 }
@@ -211,49 +229,49 @@ drg_params = {
 
 #------------ Compute --------------
 linux_images = {
-  ap-melbourne-1  = {
+  ap-melbourne-1 = {
     centos6 = "ocid1...."
     centos7 = "ocid1...."
     oel6    = "ocid1...."
     oel7    = "ocid1...."
   }
-  ap-mumbai-1     = {
+  ap-mumbai-1 = {
     centos6 = "ocid1...."
     centos7 = "ocid1...."
     oel6    = "ocid1...."
     oel7    = "ocid1...."
   }
-  ap-osaka-1      = {
+  ap-osaka-1 = {
     centos6 = "ocid1...."
     centos7 = "ocid1...."
     oel6    = "ocid1...."
     oel7    = "ocid1...."
   }
-  ap-seoul-1     = {
+  ap-seoul-1 = {
     centos6 = "ocid1...."
     centos7 = "ocid1...."
     oel6    = "ocid1...."
     oel7    = "ocid1...."
   }
-  ap-sydney-1    = {
+  ap-sydney-1 = {
     centos6 = "ocid1...."
     centos7 = "ocid1...."
     oel6    = "ocid1...."
     oel7    = "ocid1...."
   }
-  ap-tokyo-1     = {
+  ap-tokyo-1 = {
     centos6 = "ocid1...."
     centos7 = "ocid1...."
     oel6    = "ocid1...."
     oel7    = "ocid1...."
   }
-  ca-montreal-1  = {
+  ca-montreal-1 = {
     centos6 = "ocid1...."
     centos7 = "ocid1...."
     oel6    = "ocid1...."
     oel7    = "ocid1...."
   }
-  ca-toronto-1   = {
+  ca-toronto-1 = {
     centos6 = "ocid1...."
     centos7 = "ocid1...."
     oel6    = "ocid1...."
@@ -271,19 +289,19 @@ linux_images = {
     oel6    = "ocid1...."
     oel7    = "ocid1...."
   }
-  eu-zurich-1    = {
+  eu-zurich-1 = {
     centos6 = "ocid1...."
     centos7 = "ocid1...."
     oel6    = "ocid1...."
     oel7    = "ocid1...."
   }
-  me-jeddah-1    = {
+  me-jeddah-1 = {
     centos6 = "ocid1...."
     centos7 = "ocid1...."
     oel6    = "ocid1...."
     oel7    = "ocid1...."
   }
-  sa-saopaulo-1   = {
+  sa-saopaulo-1 = {
     centos6 = "ocid1...."
     centos7 = "ocid1...."
     oel6    = "ocid1...."
@@ -295,31 +313,31 @@ linux_images = {
     oel6    = "ocid1...."
     oel7    = "ocid1...."
   }
-  uk-london-1     = {
+  uk-london-1 = {
     centos6 = "ocid1...."
     centos7 = "ocid1...."
     oel6    = "ocid1...."
     oel7    = "ocid1...."
   }
-  us-ashburn-1    = {
+  us-ashburn-1 = {
     centos6 = "ocid1...."
     centos7 = "ocid1...."
     oel6    = "ocid1...."
     oel7    = "ocid1...."
   }
-  us-langley-1    = {
+  us-langley-1 = {
     centos6 = "ocid1...."
     centos7 = "ocid1...."
     oel6    = "ocid1...."
     oel7    = "ocid1...."
   }
-  us-luke-1       = {
+  us-luke-1 = {
     centos6 = "ocid1...."
     centos7 = "ocid1...."
     oel6    = "ocid1...."
     oel7    = "ocid1...."
   }
-  us-phoenix-1    = {
+  us-phoenix-1 = {
     centos6 = "ocid1...."
     centos7 = "ocid1...."
     oel6    = "ocid1...."

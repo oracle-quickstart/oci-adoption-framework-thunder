@@ -51,8 +51,8 @@ resource "oci_cloud_guard_cloud_guard_configuration" "this" {
 
 
 resource "oci_cloud_guard_target" "this" {
-  provider = oci.home
-  #depends_on           = [oci_cloud_guard_cloud_guard_configuration.this]
+  provider             = oci.home
+  depends_on           = [oci_cloud_guard_cloud_guard_configuration.this]
   for_each             = var.cloud_guard_target
   compartment_id       = var.compartments[each.value.comp_name]
   display_name         = each.value.display_name
