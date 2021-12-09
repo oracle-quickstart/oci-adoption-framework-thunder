@@ -2,88 +2,19 @@
 // Licensed under the Universal Permissive License v 1.0 as shown at https://oss.oracle.com/licenses/upl.
 
 policy_params = {
-  "lz-top-cmp-provisioning-root-policy" = {
-    name             = "lz-top-cmp-provisioning-root-policy"
+  "iam_root_permissions" = {
+    name             = "iam_root_permissions"
     description      = "Landing Zone provisioning policy."
     compartment_name = ""
-    statements = ["Allow group lz-top-cmp-provisioning-group to read objectstorage-namespaces in tenancy", # ability to query for object store namespace for creating buckets
-      "Allow group lz-top-cmp-provisioning-group to use tag-namespaces in tenancy",                        # ability to check the tag-namespaces at the tenancy level and to apply tag defaults
-      "Allow group lz-top-cmp-provisioning-group to read tag-defaults in tenancy",                         # ability to check for tag-defaults at the tenancy level
-      "Allow group lz-top-cmp-provisioning-group to manage cloudevents-rules in tenancy",                  # for events: create IAM event rules at the tenancy level 
-      "Allow group lz-top-cmp-provisioning-group to inspect compartments in tenancy",                      # for events: access to resources in compartments to select rules actions
-      "Allow group lz-top-cmp-provisioning-group to manage cloud-guard-family in tenancy",                 # ability to enable Cloud Guard, which can be done only at the tenancy level
-      "Allow group lz-top-cmp-provisioning-group to read groups in tenancy",                               # for groups lookup 
-      "Allow group lz-top-cmp-provisioning-group to inspect tenancies in tenancy",                         # for home region lookup
-      "Allow group lz-top-cmp-provisioning-group to inspect users in tenancy"                              # for users lookup
-    ]
-  },
-  "lz-top-cmp-provisioning-policy" = {
-    name             = "lz-top-cmp-provisioning-policy"
-    description      = "Landing Zone provisioning policy for lz-top-cmp compartment."
-    compartment_name = "g"
-    statements       = ["Allow group lz-top-cmp-provisioning-group to manage all-resources in compartment lz-top-cmp"]
-  }
-}
-
-
-
-
-policy_params2 = {
-  "lz-mgmt-root-policy" = {
-    name             = "lz-mgmt-root-policy"
-    description      = "Landing Zone groups management root policy."
-    compartment_name = ""
-    statements = ["Allow group lz-security-admin-group to manage tag-namespaces in tenancy",
-      "Allow group lz-security-admin-group to manage tag-defaults in tenancy",
-      "Allow group lz-security-admin-group to manage repos in tenancy"
-    ]
-  },
-  "lz-read-only-root-policy" = {
-    name             = "lz-read-only-root-policy"
-    description      = "Landing Zone groups read-only root policy."
-    compartment_name = ""
-    statements = ["Allow group lz-security-admin-group to read audit-events in tenancy",
-      "Allow group lz-security-admin-group to read app-catalog-listing in tenancy",
-      "Allow group lz-security-admin-group to read instance-images in tenancy",
-      "Allow group lz-security-admin-group to inspect buckets in tenancy",
-      "Allow group lz-appdev-admin-group to read repos in tenancy",
-      "Allow group lz-appdev-admin-group to read objectstorage-namespaces in tenancy",
-      "Allow group lz-appdev-admin-group to read app-catalog-listing in tenancy",
-      "Allow group lz-appdev-admin-group to read instance-images in tenancy",
-      "Allow group lz-network-admin-group to read repos in tenancy",
-      "Allow group lz-network-admin-group to read objectstorage-namespaces in tenancy",
-      "Allow group lz-network-admin-group to read app-catalog-listing in tenancy",
-      "Allow group lz-network-admin-group to read instance-images in tenancy",
-      "Allow group lz-database-admin-group to read repos in tenancy",
-      "Allow group lz-database-admin-group to read objectstorage-namespaces in tenancy",
-      "Allow group lz-database-admin-group to read app-catalog-listing in tenancy",
-      "Allow group lz-database-admin-group to read instance-images in tenancy",
-      "Allow group lz-auditor-group to read repos in tenancy",
-      "Allow group lz-auditor-group to read objectstorage-namespaces in tenancy",
-      "Allow group lz-auditor-group to read app-catalog-listing in tenancy",
-      "Allow group lz-auditor-group to read instance-images in tenancy",
-      "Allow group lz-auditor-group to read users in tenancy",
-      "Allow group lz-auditor-group to inspect buckets in tenancy",
-      "Allow group lz-auditor-group to use cloud-shell in tenancy"
-
-    ]
-  },
-  "lz-security-admin-root-policy" = {
-    name             = "lz-security-admin-root-policy"
-    description      = "Landing Zone lz-security-admin-group's root compartment policy."
-    compartment_name = ""
-    statements = ["Allow group lz-security-admin-group to manage cloudevents-rules in tenancy",
-      "Allow group lz-security-admin-group to manage cloud-guard-family in tenancy",
-      "Allow group lz-security-admin-group to read tenancies in tenancy",
-      "Allow group lz-security-admin-group to read objectstorage-namespaces in tenancy",
-      "Allow group lz-security-admin-group to use cloud-shell in tenancy"
-    ]
-  },
-  "lz-iam-admin-root-policy" = {
-    name             = "lz-iam-admin-root-policy"
-    description      = "Landing Zone lz-iam-admin-group's root compartment policy."
-    compartment_name = ""
-    statements = ["Allow group lz-iam-admin-group to inspect users in tenancy",
+    statements = ["Allow group lz-iam-admin-group to read objectstorage-namespaces in tenancy", # ability to query for object store namespace for creating buckets
+      "Allow group lz-iam-admin-group to use tag-namespaces in tenancy",                        # ability to check the tag-namespaces at the tenancy level and to apply tag defaults
+      "Allow group lz-iam-admin-group to read tag-defaults in tenancy",                         # ability to check for tag-defaults at the tenancy level
+      "Allow group lz-iam-admin-group to manage cloudevents-rules in tenancy",                  # for events: create IAM event rules at the tenancy level 
+      "Allow group lz-iam-admin-group to inspect compartments in tenancy",                      # for events: access to resources in compartments to select rules actions
+      "Allow group lz-iam-admin-group to manage cloud-guard-family in tenancy",                 # ability to enable Cloud Guard, which can be done only at the tenancy level
+      "Allow group lz-iam-admin-group to read groups in tenancy",                               # for groups lookup 
+      "Allow group lz-iam-admin-group to inspect tenancies in tenancy",                         # for home region lookup
+      "Allow group lz-iam-admin-group to inspect users in tenancy",                             # for users lookup
       "Allow group lz-iam-admin-group to inspect groups in tenancy",
       "Allow group lz-iam-admin-group to manage groups in tenancy where all {target.group.name != 'Administrators', target.group.name != 'lz-cred-admin-group'}",
       "Allow group lz-iam-admin-group to inspect identity-providers in tenancy",
@@ -96,23 +27,144 @@ policy_params2 = {
       "Allow group lz-iam-admin-group to use cloud-shell in tenancy"
     ]
   },
-  "lz-network-admin-root-policy" = {
-    name             = "lz-network-admin-root-policy"
-    description      = "Landing Zone lz-network-admin-group's root compartment policy."
+  "lz-top-cmp-provisioning-policy" = {
+    name             = "lz-top-cmp-provisioning-policy"
+    description      = "Landing Zone provisioning policy for lz-top-cmp compartment."
     compartment_name = ""
-    statements       = ["Allow group lz-network-admin-group to use cloud-shell in tenancy"]
+    statements       = ["Allow group lz-iam-admin-group to manage all-resources in tenancy"]
+  }
+}
+
+
+
+
+policy_params2 = {
+  "lz-security-root-policy" = {
+    name             = "lz-security-root-policy"
+    description      = "Landing Zone groups management root policy."
+    compartment_name = ""
+    statements = ["Allow group lz-security-admin-group to manage cloudevents-rules in tenancy",
+      "Allow group lz-security-admin-group to manage cloud-guard-family in tenancy",
+      "Allow group lz-security-admin-group to use cloud-shell in tenancy",
+      "Allow group lz-security-admin-group to read tenancies in tenancy",
+      "Allow group lz-security-admin-group to read objectstorage-namespaces in tenancy",
+      "Allow group lz-security-admin-group to read usage-budgets in tenancy",
+      "Allow group lz-security-admin-group to read usage-reports in tenancy"
+    ]
+  },
+  "lz-security-top-cmp-policy" = {
+    name             = "lz-security-top-cmp-policy"
+    description      = "Landing Zone groups management root policy."
+    compartment_name = ""
+    statements = ["Allow group lz-security-admin-group to manage tag-namespaces in compartment lz-top-cmp",
+      "Allow group lz-security-admin-group to manage tag-defaults in compartment lz-top-cmp",
+      "Allow group lz-security-admin-group to manage repos in compartment lz-top-cmp",
+      "Allow group lz-security-admin-group to read audit-events in compartment lz-top-cmp",
+      "Allow group lz-security-admin-group to read app-catalog-listing in compartment lz-top-cmp",
+      "Allow group lz-security-admin-group to read instance-images in compartment lz-top-cmp",
+      "Allow group lz-security-admin-group to inspect buckets in compartment lz-top-cmp",
+    ]
+  },
+  "lz-security-admin-policy" = {
+    name             = "lz-security-admin-policy"
+    description      = "Landing Zone policy for lz-security-admin-group group to manage security related services in Landing Zone enclosing compartment (lz-top-cmp)."
+    compartment_name = "lz-top-cmp"
+    statements = ["Allow group lz-security-admin-group to read all-resources in compartment lz-security-cmp",
+      "Allow group lz-security-admin-group to manage instance-family in compartment lz-security-cmp",
+      "Allow group lz-security-admin-group to manage vaults in compartment lz-security-cmp",
+      "Allow group lz-security-admin-group to manage keys in compartment lz-security-cmp",
+      "Allow group lz-security-admin-group to manage secret-family in compartment lz-security-cmp",
+      "Allow group lz-security-admin-group to manage logging-family in compartment lz-security-cmp",
+      "Allow group lz-security-admin-group to manage serviceconnectors in compartment lz-security-cmp",
+      "Allow group lz-security-admin-group to manage streams in compartment lz-security-cmp",
+      "Allow group lz-security-admin-group to manage ons-family in compartment lz-security-cmp",
+      "Allow group lz-security-admin-group to manage functions-family in compartment lz-security-cmp",
+      "Allow group lz-security-admin-group to manage waas-family in compartment lz-security-cmp",
+      "Allow group lz-security-admin-group to manage security-zone in compartment lz-security-cmp",
+      "Allow group lz-security-admin-group to read virtual-network-family in compartment lz-network-cmp",
+      "Allow group lz-security-admin-group to use subnets in compartment lz-network-cmp",
+      "Allow group lz-security-admin-group to use network-security-groups in compartment lz-network-cmp",
+      "Allow group lz-security-admin-group to use vnics in compartment lz-network-cmp",
+      "Allow group lz-security-admin-group to manage orm-stacks in compartment lz-security-cmp",
+      "Allow group lz-security-admin-group to manage orm-jobs in compartment lz-security-cmp",
+      "Allow group lz-security-admin-group to manage orm-config-source-providers in compartment lz-security-cmp",
+      "Allow group lz-security-admin-group to manage vss-family in compartment lz-security-cmp",
+      "Allow group lz-security-admin-group to read work-requests in compartment lz-security-cmp",
+      "Allow group lz-security-admin-group to manage bastion-family in compartment lz-security-cmp",
+      "Allow group lz-security-admin-group to read instance-agent-plugins in compartment lz-security-cmp",
+      "Allow group lz-security-admin-group to manage alarms in compartment lz-security-cmp",
+      "Allow group lz-security-admin-group to manage metrics in compartment lz-security-cmp"
+    ]
+  },
+  "lz-network-root-policy" = {
+    name             = "lz-network-root-policy"
+    description      = "Landing Zone groups management root policy."
+    compartment_name = ""
+    statements = ["Allow group lz-network-admin-group to use cloud-shell in tenancy",
+      "Allow group lz-network-admin-group to read usage-budgets in tenancy",
+      "Allow group lz-network-admin-group to read usage-reports in tenancy"
+    ]
+  },
+  "lz-network-admin-policy" = {
+    name             = "lz-network-admin-policy"
+    description      = "Landing Zone policy for lz-network-admin-group group to manage network related services."
+    compartment_name = "lz-top-cmp"
+    statements = ["Allow group lz-network-admin-group to read all-resources in compartment lz-network-cmp",
+      "Allow group lz-network-admin-group to manage virtual-network-family in compartment lz-network-cmp",
+      "Allow group lz-network-admin-group to manage dns in compartment lz-network-cmp",
+      "Allow group lz-network-admin-group to manage load-balancers in compartment lz-network-cmp",
+      "Allow group lz-network-admin-group to manage alarms in compartment lz-network-cmp",
+      "Allow group lz-network-admin-group to manage metrics in compartment lz-network-cmp",
+      "Allow group lz-network-admin-group to manage orm-stacks in compartment lz-network-cmp",
+      "Allow group lz-network-admin-group to manage orm-jobs in compartment lz-network-cmp",
+      "Allow group lz-network-admin-group to manage orm-config-source-providers in compartment lz-network-cmp",
+      "Allow Group lz-network-admin-group to read audit-events in compartment lz-network-cmp",
+      "Allow Group lz-network-admin-group to read vss-family in compartment lz-security-cmp",
+      "Allow group lz-network-admin-group to read work-requests in compartment lz-network-cmp",
+      "Allow Group lz-network-admin-group to manage instance-family in compartment lz-network-cmp",
+      "Allow Group lz-network-admin-group to use bastion in compartment lz-security-cmp",
+      "Allow Group lz-network-admin-group to manage bastion-session in compartment lz-network-cmp",
+      "Allow Group lz-network-admin-group to manage bastion-session in compartment lz-security-cmp",
+      "Allow Group lz-network-admin-group to manage cloudevents-rules in compartment lz-network-cmp",
+      "Allow Group lz-network-admin-group to manage alarms in compartment lz-network-cmp",
+      "Allow Group lz-network-admin-group to manage metrics in compartment lz-network-cmp",
+      "Allow Group lz-network-admin-group to read instance-agent-plugins in compartment lz-network-cmp"
+    ]
+  },
+  "lz-read-only-root-policy" = {
+    name             = "lz-read-only-root-policy"
+    description      = "Landing Zone groups read-only root policy."
+    compartment_name = ""
+    statements = ["Allow group lz-auditor-group to read repos in tenancy",
+      "Allow group lz-auditor-group to read objectstorage-namespaces in tenancy",
+      "Allow group lz-auditor-group to read app-catalog-listing in tenancy",
+      "Allow group lz-auditor-group to read instance-images in tenancy",
+      "Allow group lz-auditor-group to read users in tenancy",
+      "Allow group lz-auditor-group to inspect buckets in tenancy",
+      "Allow group lz-auditor-group to use cloud-shell in tenancy"
+    ]
   },
   "lz-appdev-admin-root-policy" = {
     name             = "lz-appdev-admin-root-policy"
     description      = "Landing Zone lz-appdev-admin-group's root compartment policy."
     compartment_name = ""
-    statements       = ["Allow group lz-appdev-admin-group to use cloud-shell in tenancy"]
+    statements = ["Allow group lz-appdev-admin-group to use cloud-shell in tenancy",
+      "Allow group lz-appdev-admin-group to read repos in tenancy",
+      "Allow group lz-appdev-admin-group to read objectstorage-namespaces in tenancy",
+      "Allow group lz-appdev-admin-group to read app-catalog-listing in tenancy",
+      "Allow group lz-appdev-admin-group to read instance-images in tenancy"
+    ]
   },
   "lz-database-admin-root-policy" = {
     name             = "lz-database-admin-root-policy"
     description      = "Landing Zone lz-database-admin-group's root compartment policy."
     compartment_name = ""
-    statements       = ["Allow group lz-database-admin-group to use cloud-shell in tenancy"]
+    statements = ["Allow group lz-database-admin-group to use cloud-shell in tenancy",
+      "Allow group lz-database-admin-group to read repos in tenancy",
+      "Allow group lz-database-admin-group to read objectstorage-namespaces in tenancy",
+      "Allow group lz-database-admin-group to read app-catalog-listing in tenancy",
+      "Allow group lz-database-admin-group to read instance-images in tenancy"
+    ]
   },
   "lz-auditor-policy" = {
     name             = "lz-auditor-policy"
@@ -152,56 +204,6 @@ policy_params2 = {
       "Allow group lz-cred-admin-group to use cloud-shell in tenancy"
     ]
   },
-  "lz-network-admin-policy" = {
-    name             = "lz-network-admin-policy"
-    description      = "Landing Zone policy for lz-network-admin-group group to manage network related services."
-    compartment_name = "lz-top-cmp"
-    statements = ["Allow group lz-network-admin-group to read all-resources in compartment lz-network-cmp",
-      "Allow group lz-network-admin-group to manage virtual-network-family in compartment lz-network-cmp",
-      "Allow group lz-network-admin-group to manage dns in compartment lz-network-cmp",
-      "Allow group lz-network-admin-group to manage load-balancers in compartment lz-network-cmp",
-      "Allow group lz-network-admin-group to manage alarms in compartment lz-network-cmp",
-      "Allow group lz-network-admin-group to manage metrics in compartment lz-network-cmp",
-      "Allow group lz-network-admin-group to manage orm-stacks in compartment lz-network-cmp",
-      "Allow group lz-network-admin-group to manage orm-jobs in compartment lz-network-cmp",
-      "Allow group lz-network-admin-group to manage orm-config-source-providers in compartment lz-network-cmp",
-      "Allow Group lz-network-admin-group to read audit-events in compartment lz-network-cmp",
-      "Allow Group lz-network-admin-group to read vss-family in compartment lz-security-cmp"
-    ]
-  },
-  "lz-security-admin-policy" = {
-    name             = "lz-security-admin-policy"
-    description      = "Landing Zone policy for lz-security-admin-group group to manage security related services in Landing Zone enclosing compartment (lz-top-cmp)."
-    compartment_name = "lz-top-cmp"
-    statements = ["Allow group lz-security-admin-group to manage tag-namespaces in compartment lz-top-cmp",
-      "Allow group lz-security-admin-group to manage tag-defaults in compartment lz-top-cmp",
-      "Allow group lz-security-admin-group to manage repos in compartment lz-top-cmp",
-      "Allow group lz-security-admin-group to read audit-events in compartment lz-top-cmp",
-      "Allow group lz-security-admin-group to read app-catalog-listing in compartment lz-top-cmp",
-      "Allow group lz-security-admin-group to read instance-images in compartment lz-top-cmp",
-      "Allow group lz-security-admin-group to inspect buckets in compartment lz-top-cmp",
-      "Allow group lz-security-admin-group to read all-resources in compartment lz-security-cmp",
-      "Allow group lz-security-admin-group to manage instance-family in compartment lz-security-cmp",
-      "Allow group lz-security-admin-group to manage vaults in compartment lz-security-cmp",
-      "Allow group lz-security-admin-group to manage keys in compartment lz-security-cmp",
-      "Allow group lz-security-admin-group to manage secret-family in compartment lz-security-cmp",
-      "Allow group lz-security-admin-group to manage logging-family in compartment lz-security-cmp",
-      "Allow group lz-security-admin-group to manage serviceconnectors in compartment lz-security-cmp",
-      "Allow group lz-security-admin-group to manage streams in compartment lz-security-cmp",
-      "Allow group lz-security-admin-group to manage ons-family in compartment lz-security-cmp",
-      "Allow group lz-security-admin-group to manage functions-family in compartment lz-security-cmp",
-      "Allow group lz-security-admin-group to manage waas-family in compartment lz-security-cmp",
-      "Allow group lz-security-admin-group to manage security-zone in compartment lz-security-cmp",
-      "Allow group lz-security-admin-group to read virtual-network-family in compartment lz-network-cmp",
-      "Allow group lz-security-admin-group to use subnets in compartment lz-network-cmp",
-      "Allow group lz-security-admin-group to use network-security-groups in compartment lz-network-cmp",
-      "Allow group lz-security-admin-group to use vnics in compartment lz-network-cmp",
-      "Allow group lz-security-admin-group to manage orm-stacks in compartment lz-security-cmp",
-      "Allow group lz-security-admin-group to manage orm-jobs in compartment lz-security-cmp",
-      "Allow group lz-security-admin-group to manage orm-config-source-providers in compartment lz-security-cmp",
-      "Allow group lz-security-admin-group to manage vss-family in compartment lz-security-cmp"
-    ]
-  },
   "lz-database-admin-policy" = {
     name             = "lz-database-admin-policy"
     description      = "Landing Zone policy for lz-database-admin-group group to manage database related resources."
@@ -225,7 +227,16 @@ policy_params2 = {
       "Allow group lz-database-admin-group to read audit-events in compartment lz-database-cmp",
       "Allow group lz-database-admin-group to read vss-family in compartment lz-security-cmp",
       "Allow group lz-database-admin-group to read vaults in compartment lz-security-cmp",
-      "Allow group lz-database-admin-group to inspect keys in compartment lz-security-cmp"
+      "Allow group lz-database-admin-group to inspect keys in compartment lz-security-cmp",
+      "Allow group lz-database-admin-group to read work-requests in compartment lz-database-cmp",
+      "Allow Group lz-database-admin-group to manage instance-family in compartment lz-database-cmp",
+      "Allow Group lz-database-admin-group to use bastion in compartment lz-security-cmp",
+      "Allow Group lz-database-admin-group to manage bastion-session in compartment lz-database-cmp",
+      "Allow Group lz-database-admin-group to manage bastion-session in compartment lz-security-cmp",
+      "Allow Group lz-database-admin-group to manage cloudevents-rules in compartment lz-database-cmp",
+      "Allow Group lz-database-admin-group to manage alarms in compartment lz-database-cmp",
+      "Allow Group lz-database-admin-group to manage metrics in compartment lz-database-cmp",
+      "Allow Group lz-database-admin-group to read instance-agent-plugins in compartment lz-database-cmp"
     ]
   },
   "lz-appdev-admin-policy" = {
@@ -262,7 +273,16 @@ policy_params2 = {
       "Allow group lz-appdev-admin-group to manage orm-jobs in compartment lz-appdev-cmp",
       "Allow group lz-appdev-admin-group to manage orm-config-source-providers in compartment lz-appdev-cmp",
       "Allow group lz-appdev-admin-group to read audit-events in compartment lz-appdev-cmp",
-      "Allow group lz-appdev-admin-group to read vss-family in compartment lz-security-cmp"
+      "Allow group lz-appdev-admin-group to read vss-family in compartment lz-security-cmp",
+      "Allow group lz-appdev-admin-group to read work-requests in compartment lz-appdev-cmp",
+      "Allow Group lz-appdev-admin-group to manage instance-family in compartment lz-appdev-cmp",
+      "Allow Group lz-appdev-admin-group to use bastion in compartment lz-security-cmp",
+      "Allow Group lz-appdev-admin-group to manage bastion-session in compartment lz-appdev-cmp",
+      "Allow Group lz-appdev-admin-group to manage bastion-session in compartment lz-security-cmp",
+      "Allow Group lz-appdev-admin-group to manage cloudevents-rules in compartment lz-appdev-cmp",
+      "Allow Group lz-appdev-admin-group to manage alarms in compartment lz-appdev-cmp",
+      "Allow Group lz-appdev-admin-group to manage metrics in compartment lz-appdev-cmp",
+      "Allow Group lz-appdev-admin-group to read instance-agent-plugins in compartment lz-appdev-cmp"
     ]
   },
   "lz-iam-admin-policy" = {

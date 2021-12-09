@@ -15,6 +15,22 @@ locals {
       ]
     }
   }
+  service_connector_policy = {
+    "lz-vcn-flow-logs-sch-policy" = {
+      name             = "lz-vcn-flow-logs-sch-policy"
+      compartment_name = "lz-top-cmp"
+      description      = "Landing Zone policy for Service Connector"
+      statements = ["Allow any-user to manage objects in compartment id ${module.iam.compartments["lz-security-cmp"]} where all {request.principal.type='serviceconnector',target.bucket.name= 'lz-vcn-flow-logs-sch-bucket',request.principal.compartment.id= '${module.iam.compartments["lz-security-cmp"]}'}"
+      ]
+    }
+    "lz-audit-sch-policy" = {
+      name             = "lz-audit-sch-policy"
+      compartment_name = "lz-top-cmp"
+      description      = "Landing Zone policy for Service Connector"
+      statements = ["Allow any-user to manage objects in compartment id ${module.iam.compartments["lz-security-cmp"]} where all {request.principal.type='serviceconnector',target.bucket.name= 'lz-audit-sch-bucket',request.principal.compartment.id='${module.iam.compartments["lz-security-cmp"]}'}",
+      ]
+    }
+  }
 }
 
 
@@ -151,4 +167,33 @@ module "cloud_guard" {
 }
 
 
+module "service_connector_bucket" {
+  source        = "../../modules/object-storage"
+  compartments  = module.iam.compartments
+  bucket_params = var.service_connector_bucket_params
+  oci_provider  = var.provider_oci
+  kms_key_ids   = {}
+}
+
+module "service_connector" {
+  source               = "../../modules/service_connector"
+  srv_connector_params = var.srv_connector_params
+  compartments         = module.iam.compartments
+  oci_provider         = var.provider_oci
+  topics               = {}
+  functions            = {}
+  streaming            = {}
+  log_id               = module.logs.logs
+  log_group            = module.logs.log_groups
+}
+
+module "service_connector_policy" {
+  source        = "../../modules/iam"
+  comp_params   = {}
+  parent_comp   = module.iam_top_comp.compartment_maps
+  user_params   = {}
+  group_params  = {}
+  policy_params = local.service_connector_policy
+  auth_provider = var.provider_oci
+}
 

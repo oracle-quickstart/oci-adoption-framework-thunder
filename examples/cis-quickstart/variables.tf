@@ -314,7 +314,7 @@ variable "log_params" {
     source_resource     = string
     source_service      = string
     source_type         = string
-    target_comp_name    = string
+    comp_name           = string
     is_enabled          = bool
     retention_duration  = number
   }))
@@ -379,5 +379,16 @@ variable "cloud_guard_target" {
     display_name = string
     target_name  = string
     target_type  = string
+  }))
+}
+
+variable "bastion_params" {
+  type = map(object({
+    bastion_name               = string
+    bastion_type               = string
+    comp_name                  = string
+    subnet_name                = string
+    cidr_block_allow_list      = list(string)
+    max_session_ttl_in_seconds = number
   }))
 }

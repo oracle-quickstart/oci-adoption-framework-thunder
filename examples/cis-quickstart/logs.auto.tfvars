@@ -24,7 +24,7 @@ log_params = {
     source_resource     = "lz-0-web-subnet"
     source_service      = "flowlogs"
     source_type         = "OCISERVICE"
-    target_comp_name    = "lz-security-cmp"
+    comp_name           = "lz-security-cmp"
     is_enabled          = true
     retention_duration  = 30
   },
@@ -36,7 +36,7 @@ log_params = {
     source_resource     = "lz-0-app-subnet"
     source_service      = "flowlogs"
     source_type         = "OCISERVICE"
-    target_comp_name    = "lz-security-cmp"
+    comp_name           = "lz-security-cmp"
     is_enabled          = true
     retention_duration  = 30
   },
@@ -48,7 +48,7 @@ log_params = {
     source_resource     = "lz-0-db-subnet"
     source_service      = "flowlogs"
     source_type         = "OCISERVICE"
-    target_comp_name    = "lz-security-cmp"
+    comp_name           = "lz-security-cmp"
     is_enabled          = true
     retention_duration  = 30
   },
@@ -60,7 +60,7 @@ log_params = {
     source_resource     = "lz-appdev-bucket"
     source_service      = "objectstorage"
     source_type         = "OCISERVICE"
-    target_comp_name    = "lz-security-cmp"
+    comp_name           = "lz-security-cmp"
     is_enabled          = true
     retention_duration  = 30
   }

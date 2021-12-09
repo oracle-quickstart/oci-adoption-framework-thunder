@@ -314,7 +314,7 @@ variable "log_params" {
     source_resource     = string
     source_service      = string
     source_type         = string
-    target_comp_name    = string
+    comp_name           = string
     is_enabled          = bool
     retention_duration  = number
   }))
@@ -391,5 +391,50 @@ variable "bastion_params" {
     subnet_name                = string
     cidr_block_allow_list      = list(string)
     max_session_ttl_in_seconds = number
+  }))
+}
+
+variable "service_connector_bucket_params" {
+  type = map(object({
+    compartment_name = string
+    name             = string
+    access_type      = string
+    storage_tier     = string
+    events_enabled   = bool
+    kms_key_name     = string
+  }))
+}
+
+variable "srv_connector_params" {
+  type = map(object({
+    comp_name                 = string
+    display_name              = string
+    srv_connector_source_kind = string
+    state                     = string
+    log_sources_params = list(object({
+      log_comp_name  = string
+      log_group_name = string
+      is_audit       = bool
+      log_name       = string
+    }))
+    source_stream_name             = string
+    srv_connector_target_kind      = string
+    obj_batch_rollover_size_in_mbs = string
+    obj_batch_rollover_time_in_ms  = string
+    obj_target_bucket              = string
+    object_name_prefix             = string
+    target_comp_name               = string
+    function_name                  = string
+    target_log_group               = string
+    mon_target_metric              = string
+    mon_target_metric_namespace    = string
+    target_stream_name             = string
+    target_topic_name              = string
+    tasks = list(object({
+      tasks_kind             = string
+      task_batch_size_in_kbs = string
+      task_batch_time_in_sec = string
+      task_function_name     = string
+    }))
   }))
 }

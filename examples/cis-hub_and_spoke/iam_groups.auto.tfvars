@@ -3,9 +3,9 @@
 
 
 group_params = {
-  "lz-top-cmp-provisioning-group" = {
-    name        = "lz-top-cmp-provisioning-group"
-    description = "Landing Zone group for resource provisioning."
+  "lz-iam-admin-group" = {
+    name        = "lz-iam-admin-group"
+    description = "Landing Zone group for managing IAM resources in the tenancy."
   }
 }
 group_params2 = {
@@ -25,10 +25,6 @@ group_params2 = {
   "lz-appdev-admin-group" = {
     name        = "lz-appdev-admin-group"
     description = "Landing Zone group for managing app development related services in compartment lz-appdev-cmp."
-  },
-  "lz-iam-admin-group" = {
-    name        = "lz-iam-admin-group"
-    description = "Landing Zone group for managing IAM resources in the tenancy."
   },
   "lz-cred-admin-group" = {
     name        = "lz-cred-admin-group"
