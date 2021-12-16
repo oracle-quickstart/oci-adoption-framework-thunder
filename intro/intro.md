@@ -17,18 +17,16 @@ The examples are organized as follows:
 | :----:       |    :----:   |   :----: |
 | Crawl      | Independent examples for OCI's basic resources       | adw_atp, dbaas, iam, instances, network  |
 | Walk      | Independent examples for OCI's advanced resources       | dns, fss, instance-principal, load-balancer, object-storage  |
+| CIS       | CIS Compliant Architectures                       | iam, network, events, logs, object storage, cloud guard, vulnerability scan
 | Free Tier      | Contains the always free components       | 1 Instance, 1 LB, 1 Network, 1 ATP, 1 Object Storage Bucket  |
 | Enterprise Tier      | Starting point for all automations       | Contains all crawl and walk terraform components  |
-| Run      | Different examples that may help you get proficient experience on OCI.       | backup-restore, glusterfs, grafana, start-stop, asg, remote-peering, kms, waas, fss-redudancy  |
+| Run      | Different examples that may help you get proficient experience on OCI.       | glusterfs, grafana, asg, kms, waas, fss-redudancy  |
 | Network Architectures      | Contains network architecture examples       | N Tier Web App, SaaS Isolated/Shared  |
-| Custom Images      | Contains custom images examples       | Packer OCI/Non-OCI builder images, move images from region 1 to region 2  |
 | Developer Tools      | Contains developer tools examples       | OKE, API Gateway, Functions, Marketplace Instances  |
-| CI CD      | CI/CD Examples for Github and Gitlab | Packer, Ansible, Docker based solutions  |
 
 
 Before going through the lab series, you should make sure you have basic knowledge in:
 * Terraform
-* Python
 * Git
 
 ## Acknowledgements

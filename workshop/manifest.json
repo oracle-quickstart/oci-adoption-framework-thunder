@@ -79,6 +79,22 @@
             "publisheddate": "04/01/2020",
             "contentid": "12nnnn",
             "filename": "../examples/dev_tools/dev-tools.md"
+        },
+        {
+            "title": "Lab 10: CIS Quickstart",
+            "description": "CIS Quickstart",
+            "partnumber": "Ennnnn_01",
+            "publisheddate": "04/01/2020",
+            "contentid": "12nnnn",
+            "filename": "../examples/cis-quickstart/CIS-quickstart.md"
+        },
+        {
+            "title": "Lab 11: CIS Hub and Spoke",
+            "description": "CIS Hub and Spoke",
+            "partnumber": "Ennnnn_01",
+            "publisheddate": "04/01/2020",
+            "contentid": "12nnnn",
+            "filename": "../examples/cis-hub_and_spoke/CIS_Hub_and_Spoke.md"
         }
     ]
 }
