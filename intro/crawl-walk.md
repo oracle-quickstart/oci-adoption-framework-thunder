@@ -94,7 +94,7 @@ Some of these independent examples will have more than one external variable, bu
 
 ## Step 2 - Navigate to Crawl Labs
 
-Crawl consists of different components. In order to access the labs you can [click here](./crawl-workshop/index.html)
+Crawl consists of different components. In order to access the labs you can [click here](../examples/crawl/crawl-workshop/index.html)
 
 The available components in crawl are:
 - IAM
@@ -105,7 +105,7 @@ The available components in crawl are:
 
 ## Step 3 - Navigate to Walk Labs
 
-Walk consists of different components. In order to access the labs you can [click here](./walk-workshop/index.html)
+Walk consists of different components. In order to access the labs you can [click here](../examples/walk/walk-workshop/index.html)
 
 The available components in walk are:
 - DNS
