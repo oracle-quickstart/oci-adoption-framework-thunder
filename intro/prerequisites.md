@@ -17,14 +17,14 @@ You will:
 - Gather Tenancy related variables (tenancy\_id, user\_id, local path to the oci\_api\_key private key, fingerprint of the oci\_api\_key\_public key, and region)
 
 ## Step 1 - Downloading the source code
-The source code is available at the following [url](https://tbd).
+The source code is available at the following [url](https://github.com/oracle-quickstart/oci-adoption-framework-thunder).
 You can easily go to that url and clone or download the project.
 
 
 ## Step 2 - Understanding the repository structure
 Directory structure for Thunder, is shown below:
 
-![Thunder Structure](./images/thunder-structure.png)
+![Thunder Structure](../images/thunder-structure.png)
 
 There are multiple folders in the repository, but the most important ones are:
 - **modules** - The logic of the terraform code
