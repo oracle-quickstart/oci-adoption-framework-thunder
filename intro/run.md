@@ -14,4 +14,4 @@ The available components in run are:
 
 Run consists of different components.
 
-In order to access the labs you can [click here](./run-workshop/index.html).
+In order to access the labs you can [click here](../examples/run/run-workshop/index.html).
