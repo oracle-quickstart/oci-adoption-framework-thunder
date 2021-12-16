@@ -82,6 +82,13 @@ module "notifications" {
   compartments        = module.iam.compartments
 }
 
+module "bastion" {
+  source         = "../../modules/bastion"
+  bastion_params = var.bastion_params
+  compartments   = module.iam.compartments
+  subnets        = module.network.subnets_ids
+}
+
 module "object-storage" {
   source        = "../../modules/object-storage"
   compartments  = module.iam.compartments

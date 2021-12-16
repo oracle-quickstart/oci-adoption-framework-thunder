@@ -16,12 +16,11 @@ resource "oci_logging_log" "this" {
   configuration {
     source {
       category = each.value.source_log_category
-      #resource = var.log_resources[each.value.source_resource]
       resource    = each.value.source_service == "objectstorage" ? each.value.source_resource : var.log_resources[each.value.source_resource]
       service     = each.value.source_service
       source_type = each.value.source_type
     }
-    compartment_id = var.compartments[each.value.target_comp_name]
+    compartment_id = var.compartments[each.value.comp_name]
   }
   is_enabled         = each.value.is_enabled
   retention_duration = each.value.retention_duration
