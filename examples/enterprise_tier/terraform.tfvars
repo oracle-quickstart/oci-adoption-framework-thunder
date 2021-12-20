@@ -124,8 +124,9 @@ policy_params = {
     ]
   },
   "Sandbox_Engineer.pl" = {
-    name        = "Sandbox_Engineer.pl"
-    description = "Sandbox_Engineer.pl"
+    name             = "Sandbox_Engineer.pl"
+    description      = "Sandbox_Engineer.pl"
+    compartment_name = ""
 
     statements = [
       "ALLOW GROUP Sandbox_Engineer.grp to manage instance-family IN TENANCY where target.compartment.name=/sandbox/",
