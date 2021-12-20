@@ -38,8 +38,7 @@ module "network" {
 module "adw" {
   source          = "../../modules/adw"
   adw_params      = var.adw_params
-  compartment_ids = var.compartments #module.iam.compartments
-  subnet_ids      = module.network.subnets_ids
+  compartment_ids = module.iam.compartments
 }
 
 module "compute" {

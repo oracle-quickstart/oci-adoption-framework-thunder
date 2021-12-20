@@ -2,7 +2,7 @@
 // Licensed under the Universal Permissive License v 1.0 as shown at https://oss.oracle.com/licenses/upl.
 
 locals {
-  adw_download_wallet = { for key, value in var.adw_params : key => value if value.create_local_wallet == true }
+  adw_download_wallet = {for key, value in var.adw_params: key => value if value.create_local_wallet == true}
 }
 
 resource "random_string" "autonomous_database_wallet_password" {
@@ -24,9 +24,9 @@ resource "oci_database_autonomous_database_wallet" "autonomous_database_wallet" 
 }
 
 resource "local_file" "autonomous_data_warehouse_wallet_file" {
-  for_each       = local.adw_download_wallet
-  content_base64 = oci_database_autonomous_database_wallet.autonomous_database_wallet[each.value.db_name].content
-  filename       = "${path.cwd}/autonomous_data_wallet_${each.value.db_name}.zip"
+  for_each               = local.adw_download_wallet
+  content_base64         = oci_database_autonomous_database_wallet.autonomous_database_wallet[each.value.db_name].content
+  filename               = "${path.cwd}/autonomous_data_wallet_${each.value.db_name}.zip"
 }
 
 resource "oci_database_autonomous_database" "adw" {
@@ -40,5 +40,4 @@ resource "oci_database_autonomous_database" "adw" {
   db_workload              = each.value.db_workload
   is_auto_scaling_enabled  = each.value.enable_auto_scaling
   is_free_tier             = each.value.is_free_tier
-  subnet_id                = var.subnet_ids[each.value.subnet_name]
 }

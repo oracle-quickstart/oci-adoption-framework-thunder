@@ -210,7 +210,6 @@ variable "adw_params" {
     enable_auto_scaling = bool
     is_free_tier        = bool
     create_local_wallet = bool
-    subnet_name         = string
   }))
 }
 
