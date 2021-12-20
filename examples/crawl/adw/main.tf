@@ -9,7 +9,8 @@ provider "oci" {
 }
 
 module "adw" {
-  source              = "../../../modules/adw"
-  adw_params          = var.adw_params
-  compartment_ids     = var.compartment_ids
+  source          = "../../../modules/adw"
+  adw_params      = var.adw_params
+  compartment_ids = var.compartment_ids
+  subnet_ids      = {}
 }

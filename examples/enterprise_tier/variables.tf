@@ -4,6 +4,9 @@ variable "provider_oci" {
   type = map(string)
 }
 
+variable "compartments" {
+  type = map(string)
+}
 variable "comp_params" {
   type = map(object({
     name          = string
@@ -210,6 +213,7 @@ variable "adw_params" {
     enable_auto_scaling = bool
     is_free_tier        = bool
     create_local_wallet = bool
+    subnet_name         = string
   }))
 }
 

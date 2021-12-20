@@ -15,6 +15,7 @@ adw_params = {
     enable_auto_scaling = false
     is_free_tier        = false
     create_local_wallet = true
+    subnet_name         = ""
   }
   hurriadw = {
     compartment_name    = "sandbox"
@@ -25,5 +26,6 @@ adw_params = {
     enable_auto_scaling = false
     is_free_tier        = false
     create_local_wallet = false
+    subnet_name         = ""
   }
 }
