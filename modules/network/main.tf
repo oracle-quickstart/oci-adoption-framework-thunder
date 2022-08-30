@@ -16,7 +16,7 @@ terraform {
   }
 }
 
-resource "oci_core_virtual_network" "vcn" {
+resource "oci_core_virtual_network" "this" {
   for_each       = var.vcn_params
   cidr_block     = each.value.vcn_cidr
   compartment_id = var.compartment_ids[each.value.compartment_name]
@@ -24,29 +24,29 @@ resource "oci_core_virtual_network" "vcn" {
   dns_label      = each.value.dns_label
 }
 
-resource "oci_core_internet_gateway" "igw" {
+resource "oci_core_internet_gateway" "this" {
   for_each       = var.igw_params
-  compartment_id = oci_core_virtual_network.vcn[each.value.vcn_name].compartment_id
-  vcn_id         = oci_core_virtual_network.vcn[each.value.vcn_name].id
+  compartment_id = oci_core_virtual_network.this[each.value.vcn_name].compartment_id
+  vcn_id         = oci_core_virtual_network.this[each.value.vcn_name].id
   display_name   = each.value.display_name
 }
 
-resource "oci_core_nat_gateway" "ngw" {
+resource "oci_core_nat_gateway" "this" {
   for_each       = var.ngw_params
-  compartment_id = oci_core_virtual_network.vcn[each.value.vcn_name].compartment_id
-  vcn_id         = oci_core_virtual_network.vcn[each.value.vcn_name].id
+  compartment_id = oci_core_virtual_network.this[each.value.vcn_name].compartment_id
+  vcn_id         = oci_core_virtual_network.this[each.value.vcn_name].id
   display_name   = each.value.display_name
 }
 
 resource "oci_core_service_gateway" "this" {
   for_each       = var.sgw_params
-  compartment_id = oci_core_virtual_network.vcn[each.value.vcn_name].compartment_id
+  compartment_id = oci_core_virtual_network.this[each.value.vcn_name].compartment_id
 
   services {
     service_id = data.oci_core_services.this.services.0.id
   }
 
-  vcn_id       = oci_core_virtual_network.vcn[each.value.vcn_name].id
+  vcn_id       = oci_core_virtual_network.this[each.value.vcn_name].id
   display_name = each.value.display_name
   # route_table_id = oci_core_route_table.test_route_table.id
 }
@@ -58,8 +58,8 @@ resource "oci_core_local_peering_gateway" "requestor_lpgs" {
   for_each = var.lpg_params
 
   display_name   = each.value.display_name
-  compartment_id = oci_core_virtual_network.vcn[each.value.acceptor].compartment_id
-  vcn_id         = oci_core_virtual_network.vcn[each.value.requestor].id
+  compartment_id = oci_core_virtual_network.this[each.value.acceptor].compartment_id
+  vcn_id         = oci_core_virtual_network.this[each.value.requestor].id
   peer_id        = oci_core_local_peering_gateway.acceptor_lpgs[each.value.display_name].id
 }
 
@@ -67,14 +67,14 @@ resource "oci_core_local_peering_gateway" "acceptor_lpgs" {
   for_each = var.lpg_params
 
   display_name   = each.value.display_name
-  compartment_id = oci_core_virtual_network.vcn[each.value.acceptor].compartment_id
-  vcn_id         = oci_core_virtual_network.vcn[each.value.acceptor].id
+  compartment_id = oci_core_virtual_network.this[each.value.acceptor].compartment_id
+  vcn_id         = oci_core_virtual_network.this[each.value.acceptor].id
 }
 
-resource "oci_core_route_table" "route_table" {
+resource "oci_core_route_table" "this" {
   for_each       = var.rt_params
-  compartment_id = oci_core_virtual_network.vcn[each.value.vcn_name].compartment_id
-  vcn_id         = oci_core_virtual_network.vcn[each.value.vcn_name].id
+  compartment_id = oci_core_virtual_network.this[each.value.vcn_name].compartment_id
+  vcn_id         = oci_core_virtual_network.this[each.value.vcn_name].id
   display_name   = each.value.display_name
 
   dynamic "route_rules" {
@@ -83,7 +83,7 @@ resource "oci_core_route_table" "route_table" {
     content {
       destination       = rr.value.destination
       destination_type  = rr.value.use_sgw ? "SERVICE_CIDR_BLOCK" : null
-      network_entity_id = rr.value.use_igw ? oci_core_internet_gateway.igw[lookup(rr.value, "igw_name", null)].id : rr.value.use_sgw ? oci_core_service_gateway.this[lookup(rr.value, "sgw_name", null)].id : oci_core_nat_gateway.ngw[lookup(rr.value, "ngw_name", null)].id
+      network_entity_id = rr.value.use_igw ? oci_core_internet_gateway.this[lookup(rr.value, "igw_name", null)].id : rr.value.use_sgw ? oci_core_service_gateway.this[lookup(rr.value, "sgw_name", null)].id : oci_core_nat_gateway.this[lookup(rr.value, "ngw_name", null)].id
     }
   }
 
@@ -144,10 +144,10 @@ resource "oci_core_route_table" "route_table" {
   # }
 }
 
-resource "oci_core_security_list" "sl" {
+resource "oci_core_security_list" "this" {
   for_each       = var.sl_params
-  compartment_id = oci_core_virtual_network.vcn[each.value.vcn_name].compartment_id
-  vcn_id         = oci_core_virtual_network.vcn[each.value.vcn_name].id
+  compartment_id = oci_core_virtual_network.this[each.value.vcn_name].compartment_id
+  vcn_id         = oci_core_virtual_network.this[each.value.vcn_name].id
   display_name   = each.value.display_name
 
   dynamic "egress_security_rules" {
@@ -191,24 +191,24 @@ resource "oci_core_security_list" "sl" {
 }
 
 
-resource "oci_core_network_security_group" "nsg" {
+resource "oci_core_network_security_group" "this" {
   for_each       = var.nsg_params
-  compartment_id = oci_core_virtual_network.vcn[each.value.vcn_name].compartment_id
-  vcn_id         = oci_core_virtual_network.vcn[each.value.vcn_name].id
+  compartment_id = oci_core_virtual_network.this[each.value.vcn_name].compartment_id
+  vcn_id         = oci_core_virtual_network.this[each.value.vcn_name].id
   display_name   = each.value.display_name
 }
 
-resource "oci_core_network_security_group_security_rule" "nsg_rules" {
+resource "oci_core_network_security_group_security_rule" "this" {
   for_each                  = var.nsg_rules_params
-  network_security_group_id = oci_core_network_security_group.nsg[each.value.nsg_name].id
+  network_security_group_id = oci_core_network_security_group.this[each.value.nsg_name].id
   protocol                  = each.value.protocol
   stateless                 = each.value.stateless
   direction                 = each.value.direction
 
-  source      = each.value.direction == "INGRESS" ? each.value.source_type == "NETWORK_SECURITY_GROUP" ? oci_core_network_security_group.nsg[each.value.source].id : each.value.source : null
+  source      = each.value.direction == "INGRESS" ? each.value.source_type == "NETWORK_SECURITY_GROUP" ? oci_core_network_security_group.this[each.value.source].id : each.value.source : null
   source_type = each.value.direction == "INGRESS" ? each.value.source_type : null
 
-  destination      = each.value.direction == "EGRESS" ? each.value.destination_type == "NETWORK_SECURITY_GROUP" ? oci_core_network_security_group.nsg[each.value.destination].id : each.value.destination : null
+  destination      = each.value.direction == "EGRESS" ? each.value.destination_type == "NETWORK_SECURITY_GROUP" ? oci_core_network_security_group.this[each.value.destination].id : each.value.destination : null
   destination_type = each.value.direction == "EGRESS" ? each.value.destination_type : null
 
 
@@ -261,22 +261,22 @@ resource "oci_core_network_security_group_security_rule" "nsg_rules" {
 }
 
 
-resource "oci_core_subnet" "subnets" {
+resource "oci_core_subnet" "this" {
   for_each                   = var.subnet_params
   cidr_block                 = each.value.cidr_block
   display_name               = each.value.display_name
   dns_label                  = each.value.dns_label
   prohibit_public_ip_on_vnic = each.value.is_subnet_private
-  compartment_id             = oci_core_virtual_network.vcn[each.value.vcn_name].compartment_id
-  vcn_id                     = oci_core_virtual_network.vcn[each.value.vcn_name].id
-  route_table_id             = oci_core_route_table.route_table[each.value.rt_name].id
+  compartment_id             = oci_core_virtual_network.this[each.value.vcn_name].compartment_id
+  vcn_id                     = oci_core_virtual_network.this[each.value.vcn_name].id
+  route_table_id             = oci_core_route_table.this[each.value.rt_name].id
   security_list_ids          = [oci_core_security_list.sl[each.value.sl_name].id]
 }
 
 
 resource "oci_core_drg" "this" {
   for_each       = var.drg_params
-  compartment_id = oci_core_virtual_network.vcn[each.value.vcn_name].compartment_id
+  compartment_id = oci_core_virtual_network.this[each.value.vcn_name].compartment_id
   display_name   = each.value.name
 }
 
@@ -284,5 +284,37 @@ resource "oci_core_drg" "this" {
 resource "oci_core_drg_attachment" "this" {
   for_each = var.drg_attachment_params
   drg_id   = oci_core_drg.this[each.value.drg_name].id
-  vcn_id   = oci_core_virtual_network.vcn[each.value.vcn_name].id
+  vcn_id   = oci_core_virtual_network.this[each.value.vcn_name].id
+}
+
+
+resource "oci_core_vlan" "this" {
+  for_each       = var.vlan_params
+  cidr_block     = each.value.vlan_cidr_block
+  compartment_id = var.compartment_id
+  vcn_id         = oci_core_virtual_network.this[each.value.vcn_name].id
+
+  display_name   = each.value.vlan_display_name
+  nsg_ids        = [for nsg_name in each.value.vlan_nsg_names: oci_core_network_security_group.nsg[nsg_name].id]
+  route_table_id = oci_core_route_table.this[each.value.rt_name].id
+
+  vlan_tag       = each.value.vlan_tag
+}
+
+resource "oci_core_private_ip" "this" {
+  for_each       = var.private_ip_params
+    
+  display_name   = each.value.privIp_display_name
+  ip_address     = each.value.ip_address
+  vlan_id        = oci_core_vlan.this[each.value.vlan_name].id
+}
+
+
+resource "oci_core_public_ip" "this" {
+  for_each       = var.public_ip_params
+  compartment_id = var.compartment_id
+  lifetime       = each.value.public_ip_lifetime
+
+  display_name   = each.value.public_ip_display_name
+  private_ip_id  = oci_core_private_ip.this[each.value.private_ip_name].id
 }

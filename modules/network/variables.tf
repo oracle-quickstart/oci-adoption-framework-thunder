@@ -161,3 +161,30 @@ variable "drg_attachment_params" {
     rt_names = list(string)
   }))
 }
+
+variable "vlan_params" {
+  type = map(object({
+    vlan_cidr_block         = string
+    vcn_name                = string
+    vlan_display_name       = string
+    vlan_nsg_names          = list(string)
+    rt_name                 = string
+    vlan_tag                = string
+  }))
+}
+
+variable "private_ip_params" {
+  type = map(object({
+    privIp_display_name     = string
+    ip_address              = string
+    vlan_name               = string
+  }))
+}
+
+variable "public_ip_params" {
+  type = map(object({
+    public_ip_lifetime      = string
+    public_ip_display_name  = string
+    private_ip_name         = string
+  }))
+}

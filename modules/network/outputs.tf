@@ -2,7 +2,7 @@
 // Licensed under the Universal Permissive License v 1.0 as shown at https://oss.oracle.com/licenses/upl.
 output "vcns" {
   value = {
-    for vcn in oci_core_virtual_network.vcn :
+    for vcn in oci_core_virtual_network.this :
     vcn.display_name => tomap({
                           "id" = vcn.id
                           "cidr" = vcn.cidr_block})
@@ -11,7 +11,7 @@ output "vcns" {
 
 output "subnets" {
   value = {
-    for subnet in oci_core_subnet.subnets :
+    for subnet in oci_core_subnet.this :
     subnet.display_name => tomap({
                             "id" = subnet.id
                             "cidr" =  subnet.cidr_block})
@@ -20,7 +20,7 @@ output "subnets" {
 
 output "subnets_ids" {
   value = {
-    for subnet in oci_core_subnet.subnets :
+    for subnet in oci_core_subnet.this :
     subnet.display_name => subnet.id
   }
 }
@@ -34,7 +34,7 @@ output "drgs" {
 
 output "nsgs" {
   value = {
-    for nsg in oci_core_network_security_group.nsg:
+    for nsg in oci_core_network_security_group.this:
       nsg.display_name => nsg.id
   }
 }
