@@ -270,7 +270,7 @@ resource "oci_core_subnet" "this" {
   compartment_id             = oci_core_virtual_network.this[each.value.vcn_name].compartment_id
   vcn_id                     = oci_core_virtual_network.this[each.value.vcn_name].id
   route_table_id             = oci_core_route_table.this[each.value.rt_name].id
-  security_list_ids          = [oci_core_security_list.sl[each.value.sl_name].id]
+  security_list_ids          = [oci_core_security_list.this[each.value.sl_name].id]
 }
 
 
@@ -291,30 +291,30 @@ resource "oci_core_drg_attachment" "this" {
 resource "oci_core_vlan" "this" {
   for_each       = var.vlan_params
   cidr_block     = each.value.vlan_cidr_block
-  compartment_id = var.compartment_id
+  compartment_id = var.compartment_ids[each.value.compartment_name]
   vcn_id         = oci_core_virtual_network.this[each.value.vcn_name].id
 
   display_name   = each.value.vlan_display_name
-  nsg_ids        = [for nsg_name in each.value.vlan_nsg_names: oci_core_network_security_group.nsg[nsg_name].id]
+  nsg_ids        = [for nsg_name in each.value.vlan_nsg_names : oci_core_network_security_group.this[nsg_name].id]
   route_table_id = oci_core_route_table.this[each.value.rt_name].id
 
-  vlan_tag       = each.value.vlan_tag
+  vlan_tag = each.value.vlan_tag
 }
 
 resource "oci_core_private_ip" "this" {
-  for_each       = var.private_ip_params
-    
-  display_name   = each.value.privIp_display_name
-  ip_address     = each.value.ip_address
-  vlan_id        = oci_core_vlan.this[each.value.vlan_name].id
+  for_each = var.private_ip_params
+
+  display_name = each.value.privIp_display_name
+  ip_address   = each.value.ip_address
+  vlan_id      = oci_core_vlan.this[each.value.vlan_name].id
 }
 
 
 resource "oci_core_public_ip" "this" {
   for_each       = var.public_ip_params
-  compartment_id = var.compartment_id
+  compartment_id = var.compartment_ids[each.value.compartment_name]
   lifetime       = each.value.public_ip_lifetime
 
-  display_name   = each.value.public_ip_display_name
-  private_ip_id  = oci_core_private_ip.this[each.value.private_ip_name].id
+  display_name  = each.value.public_ip_display_name
+  private_ip_id = oci_core_private_ip.this[each.value.private_ip_name].id
 }
