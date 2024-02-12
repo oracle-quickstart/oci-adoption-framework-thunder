@@ -164,27 +164,30 @@ variable "drg_attachment_params" {
 
 variable "vlan_params" {
   type = map(object({
-    vlan_cidr_block         = string
-    vcn_name                = string
-    vlan_display_name       = string
-    vlan_nsg_names          = list(string)
-    rt_name                 = string
-    vlan_tag                = string
+    vlan_cidr_block   = string
+    vcn_name          = string
+    vlan_display_name = string
+    vlan_nsg_names    = list(string)
+    rt_name           = string
+    vlan_tag          = string
   }))
+  default = {}
 }
 
 variable "private_ip_params" {
   type = map(object({
-    privIp_display_name     = string
-    ip_address              = string
-    vlan_name               = string
+    privIp_display_name = string
+    ip_address          = string
+    vlan_name           = string
   }))
+  default = {}
 }
 
 variable "public_ip_params" {
   type = map(object({
-    public_ip_lifetime      = string
-    public_ip_display_name  = string
-    private_ip_name         = string
+    public_ip_lifetime     = string
+    public_ip_display_name = string
+    private_ip_name        = string
   }))
+  default = {}
 }
